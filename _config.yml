@@ -1,7 +1,16 @@
-theme: jekyll-theme-tactile
+theme: minima
 # Site settings
 title: This is my name.
 email: andreas@neumeier.org
+social_links:
+    twitter: andreasofthings
+    github: andreasofthings
+    stackoverflow: "1569491"
+    facebook: andreasofthings
+    flickr: andreasofthings
+    instagram: andreasofthings
+    linkedin: andreasofthings
+    keybase: andreasofthings
 description: >- # this means to ignore newlines until "baseurl:"
   Home of Andreas Neumeier.
 # baseurl: "/twitter-new" # the subpath of your site, e.g. /blog
