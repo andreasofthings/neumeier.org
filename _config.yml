@@ -15,3 +15,6 @@ flickr_username: andreasofthings
 instagram_username: andreasofthings
 linkedin_username: andreasofthings
 keybase_username: andreasofthings
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
