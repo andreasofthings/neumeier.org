@@ -1,20 +1,22 @@
 theme: minima
 # Site settings
-title: This is my name.
+title: Andreas.
 email: andreas@neumeier.org
 description: >- # this means to ignore newlines until "baseurl:"
   Home of Andreas Neumeier.
 # baseurl: "/twitter-new" # the subpath of your site, e.g. /blog
 markdown: kramdown
 url: "https://www.neumeier.org" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: andreasofthings
-github_username:  andreasofthings
-stackoverflow_username: "1569491"
-facebook_username: andreasofthings
-flickr_username: andreasofthings
-instagram_username: andreasofthings
-linkedin_username: andreasofthings
-keybase_username: andreasofthings
-plugins:
- - jekyll-feed
- - jekyll-seo-tag
+minima:
+  date_format: "%b %-d, %Y"
+
+  # generate social links in footer
+  social_links:
+    twitter: andreasofthings
+    github:  andreasofthings
+    stackoverflow: "1569491"
+    facebook: andreasofthings
+    flickr: andreasofthings
+    instagram: andreasofthings
+    linkedin: andreasofthings
+    keybase: andreasofthings
