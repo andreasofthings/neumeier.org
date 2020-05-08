@@ -20,3 +20,6 @@ keybase_username: andreasofthings
 
 plugins:
   - jekyll-feed
+titles_from_headings:
+    strip_title: true
+    collections: true
