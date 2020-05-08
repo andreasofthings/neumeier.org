@@ -20,3 +20,13 @@ minima:
     instagram: andreasofthings
     linkedin: andreasofthings
     keybase: andreasofthings
+    
+# generate social links in footer seems to work like this
+twitter_username: andreasofthings
+github_username:  andreasofthings
+stackoverflow_username: "1569491"	
+facebook_username: andreasofthings
+flickr_username: andreasofthings
+instagram_username: andreasofthings
+linkedin_username: andreasofthings
+keybase_username: andreasofthings
