@@ -1,12 +1,12 @@
 theme: minima
-markdown: gfm
+markdown: kramdown
 # Site settings
 title: Andreas.
 email: andreas@neumeier.org
 description:  Home of Andreas Neumeier.
 url: "https://www.neumeier.org" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/" # the subpath of your site, e.g. /blog
-date_format: "%b %-d, %Y"
+# date_format: "%b %-d, %Y"
     
 # generate social links in footer seems to work like this
 twitter_username: andreasofthings
