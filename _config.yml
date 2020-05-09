@@ -3,10 +3,7 @@ markdown: gfm
 # Site settings
 title: Andreas.
 email: andreas@neumeier.org
-description:  >- # this means to ignore newlines until "baseurl:"
-Home of 
-Andreas
-Neumeier.
+description:  Home of Andreas Neumeier.
 url: "https://www.neumeier.org" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/" # the subpath of your site, e.g. /blog
 date_format: "%b %-d, %Y"
