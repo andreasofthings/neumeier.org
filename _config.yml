@@ -18,8 +18,17 @@ instagram_username: andreasofthings
 linkedin_username: andreasofthings
 keybase_username: andreasofthings
 
+social:
+    name: Andreas Neumeier
+    links: 
+      - https://twitter.com/andreasofthings
+      - https://linkedin.com/in/andreasofthings
+      - https://github.com/andreasofthings
+ 
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+  
 titles_from_headings:
     strip_title: true
     collections: true
