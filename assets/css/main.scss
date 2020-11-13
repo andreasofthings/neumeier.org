@@ -3,5 +3,6 @@
 ---
 
 @import
+  "fail"
   "neumeier/skins/{{ site.minima.skin | default: 'default' }}",
   "neumeier/initialize";
