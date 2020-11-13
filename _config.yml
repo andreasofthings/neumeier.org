@@ -1,4 +1,4 @@
-theme: minima
+theme: jekyll/minima
 markdown: kramdown
 # Site settings
 title: Andreas.
