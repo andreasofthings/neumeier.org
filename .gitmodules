@@ -7,3 +7,6 @@
 [submodule "layouts/partials/themes/hello-friend-ng"]
 	path = layouts/partials/themes/hello-friend-ng
 	url = https://github.com/rhazdon/hugo-theme-hello-friend-ng.git
+[submodule "themes/hallo"]
+	path = themes/hallo
+	url = https://github.com/EmielH/hallo-hugo.git

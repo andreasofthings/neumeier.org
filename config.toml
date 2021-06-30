@@ -1,11 +1,19 @@
 baseURL = "https://www.neumeier.org/"
 languageCode = "en-us"
 title = "neumeier.org"
-theme        = ["github.com//rhazdon/hugo-theme-hello-friend-ng"]
+theme = "hallo"
+# theme        = "hello-friend-ng"
+# theme        = ["github.com//rhazdon/hugo-theme-hello-friend-ng"]
 # theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
 
+[Author]
+    name = "Andreas"
 
 [params]
+  [[params.links]]
+    icon = "github"
+    title = "Github"
+    url = "https://github.com/andreasofthings"
   favicon = ""
   site_logo = ""
   description = "The last theme you'll ever need. Maybe."
@@ -13,7 +21,7 @@ theme        = ["github.com//rhazdon/hugo-theme-hello-friend-ng"]
   twitter = "https://twitter.com/andreasofthings"
   instagram = "https://instagram.com/andreasofthings"
   youtube = ""
-  github = "https://github.com/andreasofthings"
+  # github = "https://github.com/andreasofthings"
   gitlab = ""
   linkedin = "https://www.linkedin.com/in/andreasofthings"
   mastodon = ""
