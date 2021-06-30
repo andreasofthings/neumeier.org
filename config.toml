@@ -1,7 +1,8 @@
 baseURL = "https://www.neumeier.org/"
 languageCode = "en-us"
 title = "neumeier.org"
-theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
+theme        = "hello-friend-ng"
+# theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
 
 
 [params]
