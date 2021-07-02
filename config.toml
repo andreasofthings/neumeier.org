@@ -27,14 +27,15 @@ theme = "hallo"
     title = "instagram"
     url = "https://instagram.com/andreasofthings"
   [[params.links]]
-        iconset = "fas"
-        icon = "envelope"
-        title = "E-mail"
-        url = "mailto:andreas@neumeier.org"
-  [[params.links]]
+    iconset = "fas"
     icon = "rss"
     title = "rss"
     url = "https://nomorecubes.net/feed/"
+  [[params.links]]
+    iconset = "fas"
+    icon = "envelope"
+    title = "E-mail"
+    url = "mailto:andreas@neumeier.org"
 
 [params.colors]
     background = "#818181"
