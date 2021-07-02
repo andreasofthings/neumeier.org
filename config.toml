@@ -2,40 +2,42 @@ baseURL = "https://www.neumeier.org/"
 languageCode = "en-us"
 title = "neumeier.org"
 theme = "hallo"
-# theme        = "hello-friend-ng"
-# theme        = ["github.com//rhazdon/hugo-theme-hello-friend-ng"]
-# theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
 
 [Author]
-    name = "Andreas Neumeier"
+    name = "Andreas"
 
 [params]
   [[params.links]]
     icon = "github"
-    title = "Github"
+    title = "andreasofthings Github"
     url = "https://github.com/andreasofthings"
   [[params.links]]
     icon = "twitter"
-    title = "twitter"
+    title = "andreasofthings twitter"
     url = "https://twitter.com/andreasofthings"
   [[params.links]]
     icon = "linkedin"
-    title = "linkedin"
+    title = "andreasofthings linkedin"
     url = "https://www.linkedin.com/in/andreasofthings"
   [[params.links]]
     icon = "instagram"
-    title = "instagram"
+    title = "andreasofthings instagram"
     url = "https://instagram.com/andreasofthings"
   [[params.links]]
     iconset = "fas"
     icon = "rss"
-    title = "rss"
+    title = "andreasofthings rss"
     url = "https://nomorecubes.net/feed/"
   [[params.links]]
     iconset = "fas"
     icon = "envelope"
     title = "E-mail"
-    url = "mailto:andreas@neumeier.org"
+    url = "mailto:andreas@neumeier.org" 
+  [[params.links]]
+     iconset = "fas"
+        icon = "info-circle"
+        title = "Additional information"
+        url = "#info"
 
 [params.colors]
     background = "#818181"
