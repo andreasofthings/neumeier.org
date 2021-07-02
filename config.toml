@@ -7,7 +7,7 @@ theme = "hallo"
 # theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
 
 [Author]
-    name = "Andreas"
+    name = "Andreas Neumeier"
 
 [params]
   [[params.links]]
@@ -22,17 +22,34 @@ theme = "hallo"
     icon = "linkedin"
     title = "linkedin"
     url = "https://www.linkedin.com/in/andreasofthings"
-  favicon = ""
-  facebook = ""
-  instagram = "https://instagram.com/andreasofthings"
-  youtube = ""
-  # github = "https://github.com/andreasofthings"
-  gitlab = ""
-  mastodon = ""
-  slack = ""
-  stackoverflow = ""
-  rss = ""
+  [[params.links]]
+    icon = "instagram"
+    title = "instagram"
+    url = "https://instagram.com/andreasofthings"
+  [[params.links]]
+        iconset = "fas"
+        icon = "envelope"
+        title = "E-mail"
+        url = "mailto:andreas@neumeier.org"
+  [[params.links]]
+    icon = "rss"
+    title = "rss"
+    url = "https://nomorecubes.net/feed/"
+
+[params.colors]
+    background = "#818181"
+    foreground = "#edf7ff"
+    hover = "#ffba82"
+    
+  # favicon = ""
+  # facebook = ""
+  # youtube = ""
+  # gitlab = ""
+  # mastodon = ""
+  # slack = ""
+  # stackoverflow = ""
+
   # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
-  background_color_class = "bg-black"
+  # background_color_class = "bg-black"
   # featured_image = "/images/gohugo-default-sample-hero-image.jpg"
   # recent_posts_number = 2
