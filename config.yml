@@ -57,15 +57,19 @@ params:
     imageHeight: 120 # custom size
     buttons:
       - name: Blog
-        url: "/blog"
+        url: "https://nomorecubes.net/"
+      - name: Project
+        url: "https://pramari.de/"
 
   socialIcons: # optional
     - name: twitter
       url: "https://twitter.com/andreasofthings"
     - name: linkedin
-      url: "<link>"
+      url: "https://www.linkedin.com/in/andreasofthings/"
     - name: github
       url: "https://github.com/andreasofthings"
+    - name: rss
+      url: "https://nomorecubes.net/feed"
 
   editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/content"
