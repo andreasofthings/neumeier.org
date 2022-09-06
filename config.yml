@@ -41,6 +41,12 @@ params:
   hideSummary: false
   showtoc: false
   tocopen: false
+  
+  cover:
+    hidden: true # hide everywhere but not in structured data
+    hiddenInList: true # hide on list pages and home
+    hiddenInSingle: true # hide on single page
+
   profileMode:
     enabled: true
     title: "Hello!" # optional default will be site title
@@ -55,8 +61,13 @@ params:
 
   socialIcons: # optional
     - name: twitter
-      url: "<link>"
+      url: "https://twitter.com/andreasofthings"
     - name: linkedin
       url: "<link>"
     - name: github
-      url: "<link2>"
+      url: "https://github.com/andreasofthings"
+
+  editPost:
+    URL: "https://github.com/andreasofthings/neumeier.org/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
