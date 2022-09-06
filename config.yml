@@ -43,22 +43,20 @@ params:
   tocopen: false
   profileMode:
     enabled: true
-    title: "<Title>" # optional default will be site title
-    subtitle: "This is subtitle"
-    imageUrl: "<image link>" # optional
-    imageTitle: "<title of image as alt>" # optional
+    title: "Hello!" # optional default will be site title
+    subtitle: "Welcome to my page."
+    imageUrl: "/static/images/portrait.jpg" # optional
+    imageTitle: "Head Shot" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
       - name: Blog
         url: "/blog"
-      - name: Github
-        url: "https://github.com/"
 
-socialIcons: # optional
-  - name: "twitter"
-    url: "<link>"
-  - name: "linkedin"
-    url: "<link>"
-  - name: "github"
-    url: "<link2>"
+  socialIcons: # optional
+    - name: twitter
+      url: "<link>"
+    - name: linkedin
+      url: "<link>"
+    - name: github
+      url: "<link2>"
