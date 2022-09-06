@@ -72,6 +72,6 @@ params:
       url: "https://nomorecubes.net/feed"
 
   editPost:
-    URL: "https://github.com/andreasofthings/neumeier.org/content"
+    URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
