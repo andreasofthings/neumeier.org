@@ -14,11 +14,33 @@ minify:
   disableXML: true
   minifyOutput: true
 
-module:
-  imports:
-  - path: github.com/adityatelange/hugo-PaperMod
 
 params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  title: neumeier.org
+  description: "homepage"
+  keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software]
+  author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
+  images: ["<link or path of image for opengraph, twitter-cards>"]
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
   profileMode:
     enabled: true
     title: "<Title>" # optional default will be site title
