@@ -70,7 +70,20 @@ params:
       url: "https://github.com/andreasofthings"
     - name: rss
       url: "https://nomorecubes.net/feed"
-
+menu:
+  main:
+    - identifier: categories
+      name: categories
+      url: /categories/
+      weight: 10
+    - identifier: tags
+      name: tags
+      url: /tags/
+      weight: 20
+    - identifier: blog
+      name: blog
+      url: /posts/
+      weight: 30
   editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
     Text: "Suggest Changes" # edit text
