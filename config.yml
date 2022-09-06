@@ -1,0 +1,24 @@
+module:
+  imports:
+  - path: github.com/adityatelange/hugo-PaperMod
+
+params:
+  profileMode:
+    enabled: true
+    title: "<Title>" # optional default will be site title
+    subtitle: "This is subtitle"
+    imageUrl: "<image link>" # optional
+    imageTitle: "<title of image as alt>" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: Blog
+        url: "/blog"
+      - name: Github
+        url: "https://github.com/"
+
+socialIcons: # optional
+    - name: "linkedin"
+        url: "<link>"
+    - name: "github"
+        url: "<link2>"
