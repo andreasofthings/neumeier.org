@@ -70,6 +70,11 @@ params:
       url: "https://github.com/andreasofthings"
     - name: rss
       url: "https://nomorecubes.net/feed"
+  editPost:
+    URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
+
 menu:
   main:
     - identifier: categories
@@ -84,7 +89,3 @@ menu:
       name: blog
       url: /posts/
       weight: 30
-  editPost:
-    URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
