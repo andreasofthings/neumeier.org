@@ -3,6 +3,17 @@ languageCode: "en-us"
 title: "neumeier.org"
 theme: "PaperMod"
 
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+# googleAnalytics: UA-123-45
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
 module:
   imports:
   - path: github.com/adityatelange/hugo-PaperMod
@@ -23,7 +34,9 @@ params:
         url: "https://github.com/"
 
 socialIcons: # optional
-    - name: "linkedin"
-        url: "<link>"
-    - name: "github"
-        url: "<link2>"
+  - name: "twitter"
+    url: "<link>"
+  - name: "linkedin"
+    url: "<link>"
+  - name: "github"
+    url: "<link2>"
