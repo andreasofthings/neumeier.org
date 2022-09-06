@@ -51,7 +51,7 @@ params:
     enabled: true
     title: "Hello!" # optional default will be site title
     subtitle: "Welcome to my page."
-    imageUrl: "/static/transparent.png" # optional
+    imageUrl: "/static/Transparent Logo.png" # optional
     imageTitle: "Head Shot" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
