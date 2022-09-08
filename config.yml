@@ -57,8 +57,6 @@ params:
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
-      - name: Blog
-        url: "https://nomorecubes.net/"
       - name: Project
         url: "https://pramari.de/"
 
@@ -70,7 +68,7 @@ params:
     - name: github
       url: "https://github.com/andreasofthings"
     - name: rss
-      url: "https://nomorecubes.net/feed"
+      url: "https://nomorecubes.net/"
   editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
     Text: "Suggest Changes" # edit text
@@ -78,15 +76,11 @@ params:
 
 menu:
   main:
-    - identifier: categories
-      name: categories
-      url: /categories/
-      weight: 10
     - identifier: tags
       name: tags
       url: /tags/
       weight: 20
-    - identifier: blog
-      name: blog
+    - identifier: work
+      name: work
       url: /posts/
       weight: 30
