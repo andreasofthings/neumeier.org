@@ -5,4 +5,4 @@ tags: ["hello world"]
 author: "Me"
 ---
   
-Hello world.
+Hello world. Every IT project starts with Hello world.
