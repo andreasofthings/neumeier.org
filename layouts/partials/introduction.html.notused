@@ -2,17 +2,18 @@
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <!-- Calendly link widget end -->
-My work is in Enterprise Software. That is, primarily, Customer Experience, Sales Automation, Marketing Automation, but also Security and Privacy in that space. In that role, I do touch machine learning applications for the same purpose. In my spare time, I extend these interests into open source software.
+My work is in Enterprise Software. That is Product Management, primarily in Customer Experience, Sales Automation, Marketing Automation, and sometimes Security and Privacy in that space. In that role, I do touch machine learning applications for the same purpose. In my spare time, I extend these interests into open source software.
 <!-- Calendly link widget begin -->
 <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/andreasofthings'});return false;">I look forward to talking to you!</a> (As long as you don't want to sell to me.)
 <!-- Calendly link widget end -->
 <!-- Mailchimp link widget begin -->
 <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/e2934b313d22bb2d224b5d948/ae461f49d56fc016726979351.js");</script>
 <!-- Mailchimp link widget end -->
-<!-- Matomo -->
+<!-- Matomo 
 <script type="text/javascript">
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['requireCookieConsent']);
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
@@ -23,4 +24,12 @@ My work is in Enterprise Software. That is, primarily, Customer Experience, Sale
     g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<!-- End Matomo Code -->
+- End Matomo Code -->
+<!-- Matomo Tag Manager -->
+<script>
+var _mtm = window._mtm = window._mtm || [];
+_mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+g.async=true; g.src='https://track.pramari.de/js/container_tay0zRSO.js'; s.parentNode.insertBefore(g,s);
+</script>
+<!-- End Matomo Tag Manager -->

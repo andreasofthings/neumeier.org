@@ -1,0 +1,86 @@
+baseURL: "https://www.neumeier.org/"
+languageCode: "en-us"
+title: "neumeier.org"
+theme: "PaperMod"
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+# googleAnalytics: UA-123-45
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  title: neumeier.org
+  description: "homepage"
+  keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software]
+  author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
+  images: ["<link or path of image for opengraph, twitter-cards>"]
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShareButtons: ["linkedin", "twitter"]
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+  
+  cover:
+    hidden: true # hide everywhere but not in structured data
+    hiddenInList: true # hide on list pages and home
+    hiddenInSingle: true # hide on single page
+
+  profileMode:
+    enabled: true
+    title: "Hello!" # optional default will be site title
+    subtitle: "Welcome to my page. I'm a Product Manager at <a href='https://www.sap.de/'>SAP</a>."
+    imageUrl: "/Transparent Logo.png" # optional
+    imageTitle: "Head Shot" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: architecture project
+        url: "https://pramari.de/"
+
+  socialIcons: # optional
+    - name: twitter
+      url: "https://twitter.com/andreasofthings"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/andreasofthings/"
+    - name: github
+      url: "https://github.com/andreasofthings"
+    - name: rss
+      url: "https://nomorecubes.net/"
+  editPost:
+    URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
+
+menu:
+  main:
+    - identifier: tags
+      name: tags
+      url: /tags/
+      weight: 20
+    - identifier: work
+      name: work
+      url: /posts/
+      weight: 30
