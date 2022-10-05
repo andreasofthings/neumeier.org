@@ -42,7 +42,7 @@ params:
   hideSummary: false
   showtoc: false
   tocopen: false
-  
+
   cover:
     hidden: true # hide everywhere but not in structured data
     hiddenInList: true # hide on list pages and home
@@ -51,13 +51,13 @@ params:
   profileMode:
     enabled: true
     title: "Hello!" # optional default will be site title
-    subtitle: "Welcome to my page. I'm a Product Manager at <a href='https://www.sap.de/'>SAP</a>."
+    subtitle: "Welcome to my page. I'm a Product Manager.\nI manage Products."
     imageUrl: "/Transparent Logo.png" # optional
-    imageTitle: "Head Shot" # optional
+    imageTitle: "Grumpy me on the internet." # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
-      - name: architecture project
+      - name: software architecture product.
         url: "https://pramari.de/"
 
   socialIcons: # optional
