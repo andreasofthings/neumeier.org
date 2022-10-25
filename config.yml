@@ -51,9 +51,12 @@ params:
   profileMode:
     enabled: true
     title: "Welcome." # optional default will be site title
-    subtitle: "## I'm a Product Manager.
-               ### I manage Products.
-               "
+    subtitle: "
+    ## I'm a Product Manager.
+               
+    ### I manage Products.
+               
+    "
     imageUrl: "/Transparent Logo.png" # optional
     imageTitle: "Grumpy me on the internet." # optional
     imageWidth: 120 # custom size
