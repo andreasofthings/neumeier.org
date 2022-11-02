@@ -17,7 +17,7 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: neumeier.org
+  title: home
   description: "homepage"
   keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software]
   author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
@@ -50,15 +50,19 @@ params:
 
   profileMode:
     enabled: true
-    title: "Hello!" # optional default will be site title
-    subtitle: "Welcome to my page.\ I'm a Product Manager.\ I manage Products.
-               "
+    title: "Welcome." # optional default will be site title
+    subtitle: "
+    ## I'm a Product Manager.
+
+    ### I manage Products.
+
+    "
     imageUrl: "/Transparent Logo.png" # optional
     imageTitle: "Grumpy me on the internet." # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
-      - name: software architecture product.
+      - name: "software product."
         url: "https://pramari.de/"
 
   socialIcons: # optional
@@ -68,6 +72,8 @@ params:
       url: "https://www.linkedin.com/in/andreasofthings/"
     - name: github
       url: "https://github.com/andreasofthings"
+    - name: youtube
+      url: "https://youtube.com/@andreasofthings"
     - name: rss
       url: "https://nomorecubes.net/"
   editPost:
