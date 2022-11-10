@@ -1,9 +1,9 @@
 ---
-title: "My 1st post"
+title: "Linkpage"
 date: 2020-09-15T11:30:03+00:00
 # weight: 1
-# aliases: ["/first"]
-tags: ["first"]
+aliases: ["/tools"]
+tags: ["tools", "links"]
 author: "Me"
 showToc: true
 TocOpen: false
@@ -35,14 +35,7 @@ editPost:
     appendFilePath: true # to append file path to Edit link
 ---
   
-  <div id="dynamic_pramari_content_container">
-  
-</div>
-
-<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>  
-<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-
-<script type="javascript">
-const domContainer = document.querySelector('#dynamic_pramari_content_container');
-ReactDOM.render(e(LikeButton), domContainer);
-</script>
+    
+[I want hue](https://medialab.github.io/iwanthue/)
+    
+[colorbrewer2](https://colorbrewer2.org/)
