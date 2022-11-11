@@ -76,6 +76,8 @@ params:
       url: "https://youtube.com/@andreasofthings"
     - name: rss
       url: "https://nomorecubes.net/"
+    - name: matrix
+      url: "https://matrix.to/#/@andreas:pramari.de"
   editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
     Text: "Suggest Changes" # edit text
