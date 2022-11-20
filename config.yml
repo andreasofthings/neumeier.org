@@ -78,6 +78,9 @@ params:
       url: "https://nomorecubes.net/"
     - name: matrix
       url: "https://matrix.to/#/@andreas:pramari.de"
+    - name: mastodon
+      url: "https://mastodon.social/@andreasofthings"
+ 
   editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
     Text: "Suggest Changes" # edit text
