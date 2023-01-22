@@ -92,7 +92,7 @@ menu:
       name: tags
       url: /tags/
       weight: 20
-    - identifier: work
-      name: work
-      url: /posts/
+    - identifier: impressum
+      name: impressum
+      url: /impressum/
       weight: 30
