@@ -1,7 +1,7 @@
 ---
 title: "imprint"
-date: 2020-09-15T11:30:03+00:00
-# weight: 1
+date: 2001-01-15T11:30:03+00:00
+weight: 1
 aliases: ["/impressum"]
 tags: ["impressum", ]
 author: "Me"
@@ -34,3 +34,7 @@ editPost:
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
 ---
+
+    Andreas Neumeier
+    Georgenstr. 45a
+    80799 Minga
