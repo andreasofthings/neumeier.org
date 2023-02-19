@@ -2,7 +2,7 @@
 title: "imprint"
 date: 2001-01-15T11:30:03+00:00
 weight: 1
-aliases: ["/impressum"]
+aliases: ["/imprint"]
 tags: ["impressum", ]
 author: "Me"
 showToc: true
