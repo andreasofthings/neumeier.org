@@ -62,8 +62,10 @@ params:
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
-      - name: "software product."
+      - name: "product."
         url: "https://pramari.de/"
+      - name: "subscribe."
+        url: "https://buttondown.email/andreasofthings?tag=website"
 
   socialIcons: # optional
     - name: twitter
@@ -94,5 +96,5 @@ menu:
       weight: 20
     - identifier: impressum
       name: impressum
-      url: /impressum/
+      url: /posts/imprint/
       weight: 30
