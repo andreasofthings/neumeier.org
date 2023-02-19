@@ -21,14 +21,14 @@ params:
   description: "homepage"
   keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software]
   author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
-  images: ["<link or path of image for opengraph, twitter-cards>"]
+  images: ["/static"]
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
 
   ShowReadingTime: true
   ShowShareButtons: true
-  ShareButtons: ["linkedin", "twitter"]
+  ShareButtons: ["linkedin", "twitter", "reddit"]
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
@@ -50,11 +50,9 @@ params:
 
   profileMode:
     enabled: true
-    title: "Welcome." # optional default will be site title
+    title: "innovation guy." # optional default will be site title
     subtitle: "
-    ## I'm a Product Manager.
-
-    ### I manage Products.
+    ## and product manager.
 
     "
     imageUrl: "/Transparent Logo.png" # optional
@@ -76,12 +74,12 @@ params:
       url: "https://github.com/andreasofthings"
     - name: youtube
       url: "https://youtube.com/@andreasofthings"
-    - name: rss
-      url: "https://nomorecubes.net/"
     - name: matrix
       url: "https://matrix.to/#/@andreas:pramari.de"
     - name: mastodon
       url: "https://mastodon.social/@andreasofthings"
+    - name: rss
+      url: "https://nomorecubes.net/"
  
   editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
