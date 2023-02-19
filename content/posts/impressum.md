@@ -3,7 +3,7 @@ title: "imprint"
 date: 2001-01-15T11:30:03+00:00
 weight: 1
 aliases: ["/imprint"]
-tags: ["impressum", ]
+tags: ["impressum", "content", "contact", "required", "legal", ]
 author: "Me"
 showToc: true
 TocOpen: false
@@ -30,7 +30,7 @@ cover:
     relative: false # when using page bundles set this to true
     hidden: true # only hide on current single page
 editPost:
-    URL: "https://github.com/andreasofthings/neumeier.org/content"
+    URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/posts/imprint.md"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
 ---
