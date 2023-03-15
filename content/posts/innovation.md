@@ -1,7 +1,7 @@
 ---
 title: "design thinking - innovation process"
 date: 2023-03-15T13:30:03+00:00
-# weight: 1
+weight: 1
 aliases: ["/innovation-process"]
 tags: ["innovation", "design thinking"]
 author: "Me"
@@ -16,7 +16,6 @@ disableHLJS: true # to disable highlightjs
 disableShare: false
 disableHLJS: false
 hideSummary: false
-searchHidden: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
@@ -36,3 +35,5 @@ editPost:
 ---
 
 # Design Thinking
+
+A process to repeatable innovation.
