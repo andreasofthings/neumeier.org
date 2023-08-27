@@ -1,5 +1,5 @@
 ---
-title: "design thinking - "
+title: "Template"
 date: 2023-03-15T13:30:03+00:00
 # weight: 1
 aliases: ["/tools"]
@@ -29,9 +29,9 @@ cover:
     caption: "<text>" # display caption under cover
     relative: false # when using page bundles set this to true
     hidden: true # only hide on current single page
-editPost:
-    URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/posts/post.md"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
+#editPost:
+#    URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/posts/post.md"
+#    Text: "Suggest Changes" # edit text
+#    appendFilePath: true # to append file path to Edit link
 ---
 
