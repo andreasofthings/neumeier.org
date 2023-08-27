@@ -37,8 +37,8 @@ UseHugoToc: true
 
 # product
 
-[pramari](https://pramari.de) - tech and process demo
-[project]() - backlog
+ - [pramari](https://pramari.de) - tech and process demo
+ - [project]() - backlog
 
 # web
 
