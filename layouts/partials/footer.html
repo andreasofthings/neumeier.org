@@ -18,14 +18,9 @@
         src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.js">
             console.log('"analytics" category accepted');
     </script>
-    <script>
-        var cc = initCookieConsent();
-
-        cc.run({
-            page_scripts: true,
-            current_lang : 'en',
-            autoclear_cookies : true,                   // default: false
-        });
+    <script
+        defer
+        src="/cookieconsent-init.js">
     </script>
 </footer>
 {{- end }}
