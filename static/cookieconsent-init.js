@@ -65,7 +65,7 @@ cc.run({
                 }
             },
             settings_modal: {
-                title: logo,
+                // title: logo,
                 save_settings_btn: 'Save settings',
                 accept_all_btn: 'Accept all',
                 reject_all_btn: 'Reject all',
