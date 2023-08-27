@@ -10,8 +10,8 @@ TocOpen: false
 draft: false
 hidemeta: false
 comments: false
-description: "Desc Text."
-canonicalURL: "https://canonical.url/to/page"
+description: "Useful links."
+# canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: false
 disableHLJS: false
@@ -35,21 +35,24 @@ UseHugoToc: true
 #    appendFilePath: true # to append file path to Edit link
 ---
 
-# product
+# Meta (not as in facebook)
+
+## product
 
  - [pramari](https://pramari.de) - tech and process demo
  - [project]() - backlog
 
-# web
-
-[pramari track](https://track.pramari.de) - privacy aware web tracking powered by matomo
-
-# productivity
+## productivity
 
 [toggl track](http://track.toggl.com)
 
+## project
+
+ - [track](https://track.pramari.de) - privacy aware web tracking powered by matomo
+ - [build](https://build.pramari.de) - build system
+ - [chat](https://chat.pramari.de) - enter the [matrix](https://matrix.org).
+
 # color and design
 
-[I want hue](https://medialab.github.io/iwanthue/)
-    
-[colorbrewer2](https://colorbrewer2.org/)
+ - [I want hue](https://medialab.github.io/iwanthue/)
+ - [colorbrewer2](https://colorbrewer2.org/)
