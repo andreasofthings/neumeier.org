@@ -87,8 +87,31 @@ cc.run({
                             value: 'necessary',
                             enabled: true,
                             readonly: true          // cookie categories with readonly=true are all treated as "necessary cookies"
-                        }
-                    }, 
+                        }, 
+                        cookie_table: [
+                            {
+                                col1: 'cc_cookie',
+                                col2: 'neumeier.org',
+                                col3: 'Your choice over cookie usage.',
+                            },
+
+                    }, {
+                        title: 'Analytics & Performance cookies',
+                        description: "Analytics",
+                        toggle: {
+                            value: 'analytics',
+                            enabled: true,
+                            readonly: false
+                        },
+                        cookie_table: [
+                            {
+                                col1: '^_mtm',
+                                col2: 'pramari.de',
+                                col3: 'Our own analytics. pramari.de is hosted and operated by neumeier.org.',
+                                is_regex: true
+                            },
+                        ]
+                    },
                 ]
             }
         }
