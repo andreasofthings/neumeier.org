@@ -94,7 +94,7 @@ cc.run({
                                 col2: 'neumeier.org',
                                 col3: 'Your choice over cookie usage.',
                             },
-
+                        ]
                     }, {
                         title: 'Analytics & Performance cookies',
                         description: "Analytics",
