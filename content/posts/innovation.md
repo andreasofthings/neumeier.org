@@ -21,16 +21,16 @@ ShowPostNavLinks: true
 ShowWordCount: true
 ShowRssButtonInSectionTermList: true
 UseHugoToc: true
-cover:
-    image: "static/innovation-since-1992.png" # image path/url
-    alt: "Innovation since 1992." # alt text
-    caption: "Innovation since 1992." # display caption under cover
-    relative: false # when using page bundles set this to true
-    hidden: true # only hide on current single page
-editPost:
-    URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/posts/innovation.md"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
+# cover:
+#    image: "static/innovation-since-1992.png" # image path/url
+#    alt: "Innovation since 1992." # alt text
+#    caption: "Innovation since 1992." # display caption under cover
+#    relative: false # when using page bundles set this to true
+#    hidden: true # only hide on current single page
+#editPost:
+#    URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/posts/innovation.md"
+#    Text: "Suggest Changes" # edit text
+#    appendFilePath: true # to append file path to Edit link
 ---
 
 # Design Thinking
