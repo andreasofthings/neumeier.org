@@ -63,7 +63,7 @@ params:
       - name: "product."
         url: "https://pramari.de/"
       - name: "subscribe."
-        url: "https://buttondown.email/andreasofthings?tag=website"
+        url: "https://buttondown.email/umgangssprachlich?tag=website"
 
   socialIcons: # optional
     - name: twitter
