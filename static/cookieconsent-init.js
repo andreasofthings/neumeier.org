@@ -92,8 +92,15 @@ cc.run({
                             {
                                 col1: 'cc_cookie',
                                 col2: 'neumeier.org',
-                                col3: 'Your choice over cookie usage.',
+                                col3: '365 days',
+                                col4: 'Your choice over cookie usage.',
+                            }, {
+                                col1: '^_pk',
+                                col2: 'neumeier.org',
+                                col3: '365 days',
+                                col4: 'General session.',
                             },
+
                         ]
                     }, {
                         title: 'Analytics & Performance cookies',
@@ -105,7 +112,12 @@ cc.run({
                         },
                         cookie_table: [
                             {
-                                col1: '^_mtm',
+                                col1: '^mtm',
+                                col2: 'pramari.de',
+                                col3: 'Our own analytics. pramari.de is hosted and operated by neumeier.org.',
+                                is_regex: true
+                            }, {
+                                col1: '^matomo',
                                 col2: 'pramari.de',
                                 col3: 'Our own analytics. pramari.de is hosted and operated by neumeier.org.',
                                 is_regex: true
