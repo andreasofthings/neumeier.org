@@ -2,18 +2,18 @@
 var cc = initCookieConsent();
 
 // example logo
-var logo = '<img src="https://fontmeme.com/permalink/220805/3b90158d204fdd325173a5c7873e7cc1.png" alt="Logo" loading="lazy" style="margin-left: -4px; margin-bottom: -5px; height: 35px">';
+// var logo = '<img src="https://fontmeme.com/permalink/220805/3b90158d204fdd325173a5c7873e7cc1.png" alt="Logo" loading="lazy" style="margin-left: -4px; margin-bottom: -5px; height: 35px">';
 var cookie = '🍪';
 
 // run plugin with config object
 cc.run({
     current_lang : 'en',
     autoclear_cookies : true,                   // default: false
-    cookie_name: 'cc_cookie_demo1',             // default: 'cc_cookie'
+    // cookie_name: 'cc_cookie_demo1',          // default: 'cc_cookie'
     cookie_expiration : 365,                    // default: 182
     page_scripts: true,                         // default: false
 
-    // auto_language: null,                     // default: null; could also be 'browser' or 'document'
+    auto_language: null,                        // default: null; could also be 'browser' or 'document'
     // autorun: true,                           // default: true
     // delay: 0,                                // default: 0
     // force_consent: false,
@@ -88,41 +88,7 @@ cc.run({
                             enabled: true,
                             readonly: true          // cookie categories with readonly=true are all treated as "necessary cookies"
                         }
-                    }, {
-                        title: 'Performance and Analytics cookies',
-                        description: 'These cookies allow the website to remember the choices you have made in the past',
-                        toggle: {
-                            value: 'analytics',     // there are no default categories => you specify them
-                            enabled: false,
-                            readonly: false
-                        },
-                        cookie_table: [
-                            {
-                                col1: '^_ga',
-                                col2: 'google.com',
-                                col3: '2 years',
-                                col4: 'description ...',
-                                is_regex: true
-                            },
-                            {
-                                col1: '_gid',
-                                col2: 'google.com',
-                                col3: '1 day',
-                                col4: 'description ...',
-                            }
-                        ]
-                    }, {
-                        title: 'Advertisement and Targeting cookies',
-                        description: 'These cookies collect information about how you use the website, which pages you visited and which links you clicked on. All of the data is anonymized and cannot be used to identify you',
-                        toggle: {
-                            value: 'targeting',
-                            enabled: false,
-                            readonly: false
-                        }
-                    }, {
-                        title: 'More information',
-                        description: 'For any queries in relation to my policy on cookies and your choices, please <a class="cc-link" href="https://orestbida.com/contact">contact me</a>.',
-                    }
+                    }, 
                 ]
             }
         }
