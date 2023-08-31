@@ -37,20 +37,30 @@ UseHugoToc: true
 
 # Meta (not as in facebook)
 
-## product
+## Things that start with a 'P'
+
+All things 'P'
+
+### Product
 
  - [pramari](https://pramari.de) - tech and process demo
  - [project]() - backlog
 
-## productivity
+### Productivity
 
 [toggl track](http://track.toggl.com)
 
-## project
+### Project
 
  - [track](https://track.pramari.de) - privacy aware web tracking powered by matomo
  - [build](https://build.pramari.de) - build system
  - [chat](https://chat.pramari.de) - enter the [matrix](https://matrix.org).
+
+### Python
+
+ - [x] [django](https://www.djangoproject.com) Django: The web framework for perfectionists with deadlines
+ - [ ] [streamlit](https://streamlit.io/) A faster way to build and share data apps
+
 
 # color and design
 
