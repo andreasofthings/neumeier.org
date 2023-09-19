@@ -66,20 +66,20 @@ params:
         url: "https://buttondown.email/umgangssprachlich?tag=website"
 
   socialIcons: # optional
-    - name: twitter
-      url: "https://twitter.com/andreasofthings"
+    # - name: twitter
+    #  url: "https://twitter.com/andreasofthings"
+    - name: mastodon
+      url: "https://mastodon.social/@andreasofthings"
     - name: linkedin
       url: "https://www.linkedin.com/in/andreasofthings/"
     - name: github
       url: "https://github.com/andreasofthings"
-    - name: youtube
-      url: "https://youtube.com/@andreasofthings"
+    # - name: youtube
+    #   url: "https://youtube.com/@andreasofthings"
     - name: matrix
       url: "https://matrix.to/#/@andreas:pramari.de"
-    - name: mastodon
-      url: "https://mastodon.social/@andreasofthings"
     - name: rss
-      url: "https://nomorecubes.net/"
+      url: "https://nomorecubes.net/feed"
  
   editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
