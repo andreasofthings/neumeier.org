@@ -21,7 +21,7 @@ params:
   description: "homepage"
   keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software]
   author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
-  images: ["/static"]
+  images: ["//Transparent Logo.png"]
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
