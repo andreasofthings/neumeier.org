@@ -1,7 +1,6 @@
     ---
 title: "Digitale Selbstverteidigung"
 date: 2023-09-27T18:51:03+00:00
-# weight: 1
 aliases: ["/privacy"]
 tags: ["privacy", "privatheit", "tools", "links", "sammlung"]
 author: "Me"
@@ -11,8 +10,6 @@ draft: false
 hidemeta: false
 comments: false
 description: "Ein paar Gedanken zur digitalen Selbstverteidigung."
-# canonicalURL: ""
-disableHLJS: true # to disable highlightjs
 disableShare: false
 disableHLJS: false
 hideSummary: false
@@ -28,14 +25,14 @@ cover:
     alt: "'Privacy' by g4ll4is on [Flickr](https://flic.kr/p/dZ2y6b), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)" # alt text
     caption: "'Privacy' by g4ll4is on [Flickr](https://flic.kr/p/dZ2y6b)" # display caption under cover
     relative: false # when using page bundles set this to true
-    hidden: true # only hide on current single page
+    hidden: false # only hide on current single page
 ---
 
 # Gedanken
 
-Neben Security ist Privacy ein Thema, das mich schon mein Leben lang begleitet. Im großen und ganzen gehe ich mit meinen Daten auch Achtsam um, manchmal ist es mir ein Bedürfnis mich nicht nur mehr mit dem Thema auseinanderzusetzen, sondern auch mein bisschen Wissen darüber auch zu teilen. 
+Neben Security ist Privacy ein Thema, das mich schon mein Leben lang begleitet. Im großen und ganzen gehe ich mit meinen Daten auch Achtsam um, manchmal ist es mir ein Bedürfnis mich nicht nur mehr mit dem Thema auseinanderzusetzen, sondern auch mein bisschen Wissen darüber auch zu teilen. Und so hat mich heute bei einem Interview im Rahmen meiner Arbeit, in dem es um NFTs ging, einmal mehr das Bedürfnis überwältigt.
 
-
+Die Welt bewegt sich im Überwachungskapitalismus, aus Daten kann Geld gemadcht werden. Wer mehr Daten zu verkaufen hat, wer mehr aus Daten machen kann, kann mehr Geld verdienen. Kunden besser beobachten zu können ist unmittelbarer Wettbewerbsvorteil. 
 
 # Sammlung
 
