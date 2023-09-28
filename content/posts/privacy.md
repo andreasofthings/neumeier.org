@@ -1,4 +1,4 @@
-    ---
+---
 title: "Digitale Selbstverteidigung"
 date: 2023-09-27T18:51:03+00:00
 aliases: ["/privacy"]
