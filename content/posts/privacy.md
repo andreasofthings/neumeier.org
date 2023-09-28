@@ -1,4 +1,4 @@
----
+    ---
 title: "Digitale Selbstverteidigung"
 date: 2023-09-27T18:51:03+00:00
 # weight: 1
@@ -45,16 +45,15 @@ Neben Security ist Privacy ein Thema, das mich schon mein Leben lang begleitet. 
 
 - [Cory Doctorow](https://mamot.fr/@pluralistic) - Director at [EFF](#EFF)
 - Dr. [Patrick Breyer](https://digitalcourage.social/@echo_pbreyer) - Member of the European Parliament for the Piratenpartei, Posts auf Deutsch 🇩🇪 and in English 🇬🇧
+- [Meredith Whittaker](https://mastodon.world/@Mer__edith) - President of [Signal](/tags/signal).app 
 
 ### Literatur
 
 ### Organisationenen
 
-#### EFF
-
 - [Electronic Frontier Foundation](https://www.eff.org/)
-
-#### Digitalcourage
+- [Signal](https://signal.org) [#signal](/tags/signal)
+- [Digitalcourage](https://digitalcourage.de/) e.V.
 
 ## Browser
 
