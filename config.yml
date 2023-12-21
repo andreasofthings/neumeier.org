@@ -62,8 +62,8 @@ params:
     buttons:
       - name: "product."
         url: "https://pramari.de/"
-      - name: "subscribe."
-        url: "https://buttondown.email/umgangssprachlich?tag=website"
+      # - name: "subscribe."
+      #  url: "https://buttondown.email/umgangssprachlich?tag=website"
 
   socialIcons: # optional
     # - name: twitter
