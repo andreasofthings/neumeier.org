@@ -52,6 +52,7 @@ Die Welt bewegt sich im Überwachungskapitalismus, aus Daten kann Geld gemadcht 
 - [Electronic Frontier Foundation](https://www.eff.org/)
 - [Signal](https://signal.org) [#signal](/tags/signal)
 - [Digitalcourage](https://digitalcourage.de/) e.V.
+- [FragDenStaat.de](https://fragdenstaat.de) - Wir bringen Licht ins Dunkel der Behörden.
 
 ## Browser
 
