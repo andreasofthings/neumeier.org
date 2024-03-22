@@ -65,7 +65,7 @@ params:
       - name: "book meeting"
         url: "https://calendar.app.google/dmPG2jsDAzZZFfsY9"
       - name: "subscribe."
-      #  url: "https://buttondown.email/umgangssprachlich?tag=website"
+        url: "https://buttondown.email/showcaseproduct?tag=website"
 
   socialIcons: # optional
     # - name: twitter
