@@ -71,17 +71,19 @@ params:
     # - name: twitter
     #  url: "https://twitter.com/andreasofthings"
     - name: mastodon
-      url: "https://mastodon.social/@andreasofthings"
+      url: "https://23.social/@andreasofthings"
     - name: linkedin
       url: "https://www.linkedin.com/in/andreasofthings/"
     - name: github
       url: "https://github.com/andreasofthings"
-    # - name: youtube
-    #   url: "https://youtube.com/@andreasofthings"
+    - name: youtube
+      url: "https://youtube.com/@labstalkdev"
     - name: matrix
       url: "https://matrix.to/#/@andreas:pramari.de"
     - name: rss
       url: "https://nomorecubes.net/feed"
+    - name: signal
+      url: "https://signal.me/#eu/l53hzJl6d4OYArhgIEW3pgu3fK89dDNVFrMuyj8kAXKMGq82_yNCl44NuVOitYU8"
  
   editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/tree/main/content"
