@@ -68,8 +68,6 @@ params:
         url: "https://buttondown.email/showcaseproduct?tag=website"
 
   socialIcons: # optional
-    # - name: twitter
-    #  url: "https://twitter.com/andreasofthings"
     - name: mastodon
       url: "https://23.social/@andreasofthings"
     - name: linkedin
@@ -92,10 +90,6 @@ params:
 
 menu:
   main:
-    - identifier: tags
-      name: tags
-      url: /tags/
-      weight: 20
     - identifier: impressum
       name: impressum
       url: /posts/imprint/
