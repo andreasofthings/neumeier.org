@@ -50,9 +50,9 @@ params:
 
   profileMode:
     enabled: true
-    title: "innovation guy." # optional default will be site title
+    title: "product guy." # optional default will be site title
     subtitle: "
-    ## and product manager.
+    ## and design thinking coach.
 
     "
     imageUrl: "/Transparent Logo.png" # optional
@@ -60,10 +60,10 @@ params:
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
+      - name: "ideate."
+        url: "https://calendar.app.google/HtmDbH3wV4EcPjUX7"
       - name: "product."
         url: "https://pramari.de/"
-      - name: "meeting."
-        url: "https://calendar.app.google/HtmDbH3wV4EcPjUX7"
       - name: "subscribe."
         url: "https://buttondown.email/showcaseproduct?tag=website"
 

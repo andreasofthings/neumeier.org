@@ -8,13 +8,13 @@ var cookie = '🍪';
 // run plugin with config object
 cc.run({
     current_lang : 'en',
-    autoclear_cookies : true,                   // default: false
+    autoclear_cookies : false,                  // default: false
     // cookie_name: 'cc_cookie_demo1',          // default: 'cc_cookie'
     cookie_expiration : 365,                    // default: 182
     page_scripts: true,                         // default: false
 
-    auto_language: null,                        // default: null; could also be 'browser' or 'document'
-    // autorun: true,                           // default: true
+    auto_language: browser,                     // default: null; could also be 'browser' or 'document'
+    autorun: false,                             // default: true
     // delay: 0,                                // default: 0
     // force_consent: false,
     // hide_from_bots: false,                   // default: false
@@ -60,8 +60,8 @@ cc.run({
                     role: 'accept_all'              // 'accept_selected' or 'accept_all'
                 },
                 secondary_btn: {
-                    text: 'Reject all',
-                    role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                    text: 'Choose',
+                    role: 'settings'        // 'settings' or 'accept_necessary'
                 }
             },
             settings_modal: {
@@ -114,11 +114,13 @@ cc.run({
                             {
                                 col1: '^mtm',
                                 col2: 'pramari.de',
+                                col3: '365d',
                                 col3: 'Our own analytics. pramari.de is hosted and operated by neumeier.org.',
                                 is_regex: true
                             }, {
                                 col1: '^matomo',
                                 col2: 'pramari.de',
+                                col3: '365d'
                                 col3: 'Our own analytics. pramari.de is hosted and operated by neumeier.org.',
                                 is_regex: true
                             },
