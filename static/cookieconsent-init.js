@@ -8,16 +8,16 @@ var cookie = '🍪';
 // run plugin with config object
 cc.run({
     current_lang : 'en',
-    autoclear_cookies : false,                  // default: false
+    // autoclear_cookies : false,               // default: false
     // cookie_name: 'cc_cookie_demo1',          // default: 'cc_cookie'
     cookie_expiration : 365,                    // default: 182
     page_scripts: true,                         // default: false
 
     auto_language: browser,                     // default: null; could also be 'browser' or 'document'
-    autorun: false,                             // default: true
-    // delay: 0,                                // default: 0
+    // autorun: true,                           // default: true
+    delay: 10,                                  // default: 0
     // force_consent: false,
-    // hide_from_bots: false,                   // default: false
+    hide_from_bots: true,                       // default: false
     // remove_cookie_tables: false              // default: false
     // cookie_domain: location.hostname,        // default: current domain
     // cookie_path: "/",                        // default: root
