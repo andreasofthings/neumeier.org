@@ -120,7 +120,7 @@ cc.run({
                             }, {
                                 col1: '^matomo',
                                 col2: 'pramari.de',
-                                col3: '365d'
+                                col3: '365d',
                                 col3: 'Our own analytics. pramari.de is hosted and operated by neumeier.org.',
                                 is_regex: true
                             },
