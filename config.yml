@@ -50,7 +50,7 @@ params:
 
   profileMode:
     enabled: true
-    title: "product guy." # optional default will be site title
+    title: "product and privacy." # optional default will be site title
     subtitle: "
     ## and design thinking coach.
 
