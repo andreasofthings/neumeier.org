@@ -65,8 +65,6 @@ params:
         url: "https://calendar.app.google/HtmDbH3wV4EcPjUX7"
       - name: "product."
         url: "https://pramari.de/"
-      - name: "subscribe."
-        url: "https://buttondown.com/sorted?tag=website"
 
   socialIcons: # optional
     - name: mastodon
