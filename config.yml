@@ -19,7 +19,7 @@ params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: home
   description: "homepage"
-  keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software]
+  keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software, Product, Privacy]
   author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
   images: ["/Transparent Logo.png"]
   DateFormat: "January 2, 2006"
@@ -50,9 +50,9 @@ params:
 
   profileMode:
     enabled: true
-    title: "product and privacy." # optional default will be site title
+    title: "product / privacy." # optional default will be site title
     subtitle: "
-    ## and design thinking coach.
+    ### design thinking coach.
 
     ##### Andreas
     "
