@@ -31,7 +31,7 @@
   content: " >";
 }
 
-button:hover, button:focus {
+.subscribe-form button:hover, button:focus {
   transform: rotate(-1.5deg); 
   background: #000;
   color: #fff;
