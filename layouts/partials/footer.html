@@ -1,24 +1,20 @@
 {{- if not (.Param "hideFooter") }}
 <footer class="footer">
+    <div>
+    <form action="https://buttondown.com/api/emails/embed-subscribe/sorted" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/sorted', 'popupwindow')"
+  class="embeddable-buttondown-form">
+        <input type="email" name="email" id="bd-email" />
+        <input type="submit" value="Subscribe" />
+        <input type="hidden" name="tag" value="website" />
+    </form>
+    </div>
     {{- if site.Copyright }}
     <span>{{ site.Copyright | markdownify }}</span>
     {{- else }}
     <span>&copy; 1999 - {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
     {{- end }}
-    <span>
-        <!-- Powered by -->
-        <!-- <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> & -->
-        <!-- <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a> -->
-        <button type="button" data-cc="c-settings">Manage cookie settings</button>
-    </span>
-    <script 
-        defer 
-        src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.9.2/dist/cookieconsent.js">
-    </script>
-    <script
-        defer
-        src="/cookieconsent-init.js">
-    </script>
+    <span><button data-cc="c-settings">Manage cookie settings</button></span>
+    <script defer type="module" src="https://pramari.de/static/cookieconsent/cookieconsent-config.js"></script>
 </footer>
 {{- end }}
 
