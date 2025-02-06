@@ -1,3 +1,9 @@
-input#bd-email {
+form {
+    border: 1px;
+    display: block;
+    margin-top: 0em;
+}
+
+.form .input#bd-email {
   border: 1px;
 }
