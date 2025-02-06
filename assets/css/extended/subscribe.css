@@ -1,35 +1,30 @@
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-}
-
 .subscribe-form {
     border: 1px;
     display: block;
     margin-top: 0em;
     box-sizing: border-box;
-
-}
-
-button {
-  padding: 5px;
-  font: bold 0.6em sans-serif;
   border: 2px solid #333;
   border-radius: 5px;
-  background: none;
-  cursor: pointer;
-  transform: rotate(-1.5deg);
 }
 
-button:after {
+.subscribe-form button, input {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+.subscribe-form button {
+  padding: 5px;
+  font: bold 0.6em sans-serif;
+  background: none;
+  cursor: pointer;
+  /* transform: rotate(-1.5deg); */
+}
+
+.subscribe-form button:after {
   content: " >";
 }
 
-button:hover,
-button:focus {
+button:hover, button:focus {
   background: #000;
   color: #fff;
 }
