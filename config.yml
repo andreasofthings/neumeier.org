@@ -66,7 +66,7 @@ params:
       - name: "product."
         url: "https://pramari.de/"
       - name: "subscribe."
-        url: "https://buttondown.email/showcaseproduct?tag=website"
+        url: "https://buttondown.com/sorted?tag=website"
 
   socialIcons: # optional
     - name: mastodon
