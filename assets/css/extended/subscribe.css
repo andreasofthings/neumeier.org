@@ -1,17 +1,24 @@
-.subscribe-form {
+.subscribe-podlove {
+    margin-top: 0em;
+    display: block;
+    text-align: center;
+}
+
+.subscribe-buttondown form {
     border: 1px;
     display: block;
+    text-align: center;
     margin-top: 0em;
     box-sizing: border-box;
     font: bold 0.8em sans-serif;
 }
 
-.subscribe-form button, input {
+.subscribe-buttondown button, input {
   font-family: inherit;
   font-size: 100%;
 }
 
-.subscribe-form input {
+.subscribe-buttondown input {
   padding: 5px;
   background: none;
   cursor: pointer;
@@ -19,7 +26,7 @@
   border-radius: 5px;
 }
 
-.subscribe-form button {
+.subscribe-buttondown button {
   padding: 5px;
   background: none;
   cursor: pointer;
@@ -27,11 +34,11 @@
   border-radius: 5px;
 }
 
-.subscribe-form button:after {
+.subscribe-buttondown button:after {
   content: " >";
 }
 
-.subscribe-form button:hover, button:focus {
+.subscribe-buttondown button:hover, button:focus {
   transform: rotate(-1.5deg); 
   background: #000;
   color: #fff;
