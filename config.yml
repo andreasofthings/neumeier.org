@@ -56,7 +56,7 @@ params:
 
     ##### Andreas
 
-<script>window.podcastData={"title":"sortiert: produkt","subtitle":"business / product / strategy / technology / therapy","description":"","cover":"sortiert","feeds":[{"type":"audio","format":"mp3","url":"https://sortiert.work/show/prdct/feed/prdct/"}]}</script><script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="en" data-size="medium" data-json-data="podcastData" data-color="#469cd1" data-format="cover" data-style="outline"></script><noscript><a href="https://sortiert.work/show/prdct/feed/prdct/">Subscribe to feed</a></noscript>
+    <script>window.podcastData={"title":"sortiert: produkt","subtitle":"business / product / strategy / technology / therapy","description":"","cover":"sortiert","feeds":[{"type":"audio","format":"mp3","url":"https://sortiert.work/show/prdct/feed/prdct/"}]}</script><script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="en" data-size="medium" data-json-data="podcastData" data-color="#469cd1" data-format="cover" data-style="outline"></script><noscript><a href="https://sortiert.work/show/prdct/feed/prdct/">Subscribe to feed</a></noscript>
     "
     imageUrl: "/Transparent Logo.png" # optional
     imageTitle: "Grumpy me on the internet." # optional
