@@ -13,7 +13,7 @@
     {{- else }}
     <span>&copy; 1999 - {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
     {{- end }}
-    <span><button data-cc="c-settings">Manage cookie settings</button></span>
+    <span><button data-cc="show-preferencesModal">Manage cookie settings</button></span>
     <script defer type="module" src="https://pramari.de/static/cookieconsent/cookieconsent-config.js"></script>
 </footer>
 {{- end }}
