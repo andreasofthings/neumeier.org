@@ -1,6 +1,6 @@
 // import 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.umd.js';
 // import 'https://pramari.de/static/cookieconsent/cookieconsent.3.0.1.umd.js';
-import "/js/cookieconsent.js";
+import "/js/cookieconsent.umd.js";
 
 function updateConsent(cookie) {
   console.log(cookie);
