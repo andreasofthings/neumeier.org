@@ -12,39 +12,39 @@
 
     <body>
         <header class="bg-gray-100 p-4 border-b border-gray-300">{{ partial "header.html" . }}</header>
-        <main class="container mx-auto py-8 px-4">
-            {{ if site.Params.profileMode.enabled }}
-            <section class="profile-mode text-center mb-8 p-6 bg-white shadow-lg rounded-lg">
-                {{ with site.Params.profileMode }}
-                    {{ if .imageUrl }}
-                    <img src="{{ .imageUrl }}" alt="{{ .imageTitle | default "Profile Image" }}" class="mx-auto mb-4 rounded-full" style="width: {{ .imageWidth | default 128 }}px; height: {{ .imageHeight | default 128 }}px; object-fit: cover;">
-                    {{ end }}
-                    <h1 class="text-3xl font-bold mb-2">{{ .title }}</h1>
-                    <p class="text-xl text-gray-600 mb-4">{{ .subtitle }}</p>
-                    
-                    {{ if .buttons }}
-                    <div class="buttons flex justify-center space-x-4 mb-4">
-                        {{ range .buttons }}
-                        <a href="{{ .url }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            {{ .name }}
-                        </a>
-                        {{ end }}
-                    </div>
-                    {{ end }}
-
-                    {{ if .socialIcons }}
-                    <div class="social-icons flex justify-center space-x-4">
-                        {{ range .socialIcons }}
-                        <a href="{{ .url }}" aria-label="{{ .name }}" class="text-gray-500 hover:text-gray-700">
-                            <!-- You will need to replace this with actual SVG icons or an icon font -->
-                            <span class="text-2xl">{{ .name }}</span> 
-                        </a>
-                        {{ end }}
-                    </div>
-                    {{ end }}
+        {{ if site.Params.profileMode.enabled }}
+        <section class="profile-mode text-center py-8 px-4 bg-white shadow-lg">
+            {{ with site.Params.profileMode }}
+                {{ if .imageUrl }}
+                <img src="{{ .imageUrl }}" alt="{{ .imageTitle | default "Profile Image" }}" class="mx-auto mb-4 rounded-full" style="width: {{ .imageWidth | default 128 }}px; height: {{ .imageHeight | default 128 }}px; object-fit: cover;">
                 {{ end }}
-            </section>
+                <h1 class="text-3xl font-bold mb-2">{{ .title }}</h1>
+                <p class="text-xl text-gray-600 mb-4">{{ .subtitle }}</p>
+                
+                {{ if .buttons }}
+                <div class="buttons flex justify-center space-x-4 mb-4">
+                    {{ range .buttons }}
+                    <a href="{{ .url }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        {{ .name }}
+                    </a>
+                    {{ end }}
+                </div>
+                {{ end }}
+
+                {{ if .socialIcons }}
+                <div class="social-icons flex justify-center space-x-4">
+                    {{ range .socialIcons }}
+                    <a href="{{ .url }}" aria-label="{{ .name }}" class="text-gray-500 hover:text-gray-700">
+                        <!-- You will need to replace this with actual SVG icons or an icon font -->
+                        <span class="text-2xl">{{ .name }}</span> 
+                    </a>
+                    {{ end }}
+                </div>
+                {{ end }}
             {{ end }}
+        </section>
+        {{ end }}
+        <main class="container mx-auto py-8 px-4">
             {{ block "main" . }}{{ end }}
         </main>
         <footer class="bg-gray-100 p-4 border-t border-gray-300 text-center">{{ partial "footer.html" . }}</footer>
