@@ -66,7 +66,7 @@ params:
       - name: "product."
         url: "https://pramari.de/"
 
-  socialIcons: # optional
+    socialIcons: # optional
     - name: mastodon
       url: "https://23.social/@andreasofthings"
     - name: linkedin
