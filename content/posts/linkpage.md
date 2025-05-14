@@ -24,8 +24,9 @@ ShowWordCount: true
 ShowRssButtonInSectionTermList: true
 UseHugoToc: true
 editPost:
-    URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/posts/linkpage.md"
+    URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/"
     Text: "Suggest Changes" # edit text
+    # appendFilePath: False
 #cover:
 #   image: "<image path/url>" # image path/url
 #    alt: "<alt text>" # alt text
