@@ -1,7 +1,7 @@
 baseURL: "https://www.neumeier.org/"
 languageCode: "en-us"
 title: "neumeier.org"
-theme: "garden"
+theme: "hugo-PaperMod"
 
 enableRobotsTXT: true
 buildDrafts: false
