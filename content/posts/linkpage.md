@@ -41,14 +41,15 @@ UseHugoToc: true
 
 All things 'P'
 
-### Product
+### Product (pramari)
 
  - [pramari](https://pramari.de) - tech and process demo
- - [project]() - backlog
+ - [project]() - backlog (currently empty)
 
 ### Productivity
 
-[toggl track](http://track.toggl.com)
+ - [toggl track](http://track.toggl.com)
+ - [Super Productivity](https://super-productivity.com)
 
 ### Project
 
@@ -59,7 +60,7 @@ All things 'P'
 ### Python
 
  - [x] [django](https://www.djangoproject.com) Django: The web framework for perfectionists with deadlines
- - [ ] [streamlit](https://streamlit.io/) A faster way to build and share data apps
+ - [ ] [streamlit](https://streamlit.io/) A faster way to build and share data apps 
 
 
 # color and design
