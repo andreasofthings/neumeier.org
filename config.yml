@@ -93,3 +93,7 @@ menu:
       name: impressum
       url: /posts/imprint/
       weight: 30
+    - identifier: links
+      name: links
+      url: /posts/linkpage/
+      weight: 40
