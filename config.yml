@@ -52,14 +52,14 @@ params:
     enabled: true
     title: "product / privacy." # optional default will be site title
     subtitle: "
-    ### design thinking coach.
+    ### 
 
     ##### Andreas
     "
-    imageUrl: "/Transparent Logo.png" # optional
-    imageTitle: "Grumpy me on the internet." # optional
-    imageWidth: 120 # custom size
-    imageHeight: 120 # custom size
+    # imageUrl: "/Transparent Logo.png" # optional
+    # imageTitle: "Grumpy me on the internet." # optional
+    # imageWidth: 120 # custom size
+    # imageHeight: 120 # custom size
     buttons:
       - name: "ideate."
         url: "https://calendar.app.google/HtmDbH3wV4EcPjUX7"
