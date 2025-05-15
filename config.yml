@@ -21,7 +21,7 @@ params:
   description: "homepage"
   keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software, Product, Privacy]
   author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
-  images: ["/Transparent Logo.png"]
+  # images: ["/Transparent Logo.png"]
   DateFormat: "January 2, 2026"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
@@ -59,7 +59,7 @@ params:
     # imageUrl: "/Transparent Logo.png" # optional
     # imageTitle: "Grumpy me on the internet." # optional
     # imageWidth: 120 # custom size
-    # imageHeight: 120 # custom size
+    # 	imageHeight: 120 # custom size
     buttons:
       - name: "ideate."
         url: "https://calendar.app.google/HtmDbH3wV4EcPjUX7"
