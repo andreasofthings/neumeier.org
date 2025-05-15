@@ -98,7 +98,11 @@ menu:
       name: impressum
       url: /posts/imprint/
       weight: 30
+    - identifier: search
+      name: search
+      url: /search/
+      weight: 20
     - identifier: links
       name: links
       url: /posts/linkpage/
-      weight: 20
+      weight: 10
