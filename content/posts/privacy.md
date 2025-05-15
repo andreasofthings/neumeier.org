@@ -29,7 +29,7 @@ cover:
 ---
 
 
-# Gedanken
+# Warum
 
 Neben Security ist Privacy ein Thema, das mich schon mein Leben lang begleitet. Im großen und ganzen gehe ich mit meinen Daten auch Achtsam um, manchmal ist es mir ein Bedürfnis mich nicht nur mehr mit dem Thema auseinanderzusetzen, sondern auch mein bisschen Wissen darüber auch zu teilen. Und so hat mich heute bei einem Interview im Rahmen meiner Arbeit, in dem es um NFTs ging, einmal mehr das Bedürfnis überwältigt.
 
