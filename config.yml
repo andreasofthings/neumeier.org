@@ -20,6 +20,11 @@ outputs:
     - RSS
     - JSON # necessary for search
 
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+      
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: home
