@@ -11,7 +11,7 @@ draft: false
 hidemeta: false
 comments: true
 description: "Useful links."
-canonicalURL: "https://neumeier.org/pages/linkpage"
+canonicalURL: "https://neumeier.org/links"
 disableHLJS: true # to disable highlightjs
 disableShare: false
 disableHLJS: false
@@ -27,9 +27,9 @@ editPost:
     URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/"
     Text: "Suggest Changes" # edit text
     # appendFilePath: False
-#cover:
-#   image: "<image path/url>" # image path/url
-#    alt: "<alt text>" # alt text
+cover:
+   image: "/links/links.jpg" # image path/url
+   alt: "Linkpage Cover Image" # alt text
 #    caption: "<text>" # display caption under cover
 #    relative: false # when using page bundles set this to true
 #    hidden: true # only hide on current single page
@@ -72,7 +72,7 @@ All things 'P'
 ### Python
 
  - [x] [django](https://www.djangoproject.com) Django: The web framework for perfectionists with deadlines
- - [ ] [streamlit](https://streamlit.io/) A faster way to build and share data apps 
+ - [ ] [streamlit](https://streamlit.io/) A faster way to build and share data apps
 
 
 # color and design
