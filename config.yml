@@ -24,7 +24,7 @@ markup:
   goldmark:
     renderer:
       unsafe: true
-      
+
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: home
@@ -62,7 +62,7 @@ params:
     enabled: true
     title: "product / privacy." # optional default will be site title
     subtitle: "
-    ### 
+    ###
 
     ##### Andreas
     "
@@ -109,5 +109,5 @@ menu:
       weight: 20
     - identifier: links
       name: links
-      url: /posts/linkpage/
+      url: /links/
       weight: 10
