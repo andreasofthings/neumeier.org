@@ -1,30 +1,26 @@
 // import 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.umd.js';
 // import 'https://pramari.de/static/cookieconsent/cookieconsent.3.0.1.umd.js';
-import "/js/cookieconsent.umd.js";
+import "/cc/cookieconsent.umd.js";
 
 function updateConsent(cookie) {
-  console.log(cookie);
+  /* none */
 }
 
+document.documentElement.classList.add("cc--darkmode");
+
 CookieConsent.run({
-  onFirstConsent: ({ cookie }) => {
-    updateConsent(cookie);
-  },
-  onConsentChange: ({ cookie }) => {
-    updateConsent(cookie);
-  },
-  onChange: ({ cookie }) => {
-    updateConsent(cookie);
-  },
+  onFirstConsent: ({ cookie }) => {},
+  onConsentChange: ({ cookie }) => {},
+  onChange: ({ cookie }) => {},
   guiOptions: {
     consentModal: {
-      layout: "box wide",
+      layout: "box",
       position: "bottom right",
       equalWeightButtons: false,
       flipButtons: false,
     },
     preferencesModal: {
-      layout: "bar wide",
+      layout: "bar",
       position: "right",
       equalWeightButtons: false,
       flipButtons: true,
@@ -42,7 +38,7 @@ CookieConsent.run({
     default: "en",
     autoDetect: "browser",
     translations: {
-      en: "https://pramari.de/static/cookieconsent/en.json",
+      en: "/cc/en.json",
     },
   },
   disablePageInteraction: false,
