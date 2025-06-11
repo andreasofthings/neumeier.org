@@ -6,8 +6,8 @@
     <head>
         {{ partial "head.html" . }}
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <script src="https://unpkg.com/heroicons@1.0.6/dist/outline.js" defer></script>
-        <script src="https://unpkg.com/heroicons@1.0.6/dist/solid.js" defer></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     </head>
 
     <body>
@@ -20,7 +20,7 @@
                 {{ end }}
                 <h1 class="text-3xl font-bold mb-2">{{ .title }}</h1>
                 <p class="text-xl text-gray-600 mb-4">{{ .subtitle }}</p>
-                
+
                 {{ if .buttons }}
                 <div class="buttons flex justify-center space-x-4 mb-4">
                     {{ range .buttons }}
@@ -36,7 +36,7 @@
                     {{ range .socialIcons }}
                     <a href="{{ .url }}" aria-label="{{ .name }}" class="text-gray-500 hover:text-gray-700">
                         <!-- You will need to replace this with actual SVG icons or an icon font -->
-                        <span class="text-2xl">{{ .name }}</span> 
+                        <span class="text-2xl">{{ .name }}</span>
                     </a>
                     {{ end }}
                 </div>

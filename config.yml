@@ -1,7 +1,7 @@
 baseURL: "https://www.neumeier.org/"
 languageCode: "en-us"
 title: "neumeier.org"
-theme: "garden"
+theme: "hugo-PaperMod"
 
 enableRobotsTXT: true
 buildDrafts: false
@@ -14,14 +14,24 @@ minify:
   disableXML: true
   minifyOutput: true
 
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
 
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+      
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: home
   description: "homepage"
   keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software, Product, Privacy]
   author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
-  images: ["/Transparent Logo.png"]
+  # images: ["/Transparent Logo.png"]
   DateFormat: "January 2, 2026"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
@@ -52,21 +62,21 @@ params:
     enabled: true
     title: "product / privacy." # optional default will be site title
     subtitle: "
-    ### design thinking coach.
+    ### 
 
     ##### Andreas
     "
-    imageUrl: "/Transparent Logo.png" # optional
-    imageTitle: "Grumpy me on the internet." # optional
-    imageWidth: 120 # custom size
-    imageHeight: 120 # custom size
+    # imageUrl: "/Transparent Logo.png" # optional
+    # imageTitle: "Grumpy me on the internet." # optional
+    # imageWidth: 120 # custom size
+    # 	imageHeight: 120 # custom size
     buttons:
       - name: "ideate."
         url: "https://calendar.app.google/HtmDbH3wV4EcPjUX7"
       - name: "product."
         url: "https://pramari.de/"
 
-    socialIcons: # optional
+  socialIcons: # optional
     - name: mastodon
       url: "https://23.social/@andreasofthings"
     - name: linkedin
@@ -93,3 +103,11 @@ menu:
       name: impressum
       url: /posts/imprint/
       weight: 30
+    - identifier: search
+      name: search
+      url: /search/
+      weight: 20
+    - identifier: links
+      name: links
+      url: /posts/linkpage/
+      weight: 10
