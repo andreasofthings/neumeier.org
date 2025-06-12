@@ -1,0 +1,22 @@
+/* For two-column layout */
+.custom-row {
+  display: flex;
+  flex-wrap: wrap; /* Allows columns to wrap on smaller screens if needed */
+  margin-left: -15px; /* Adjust as needed for gutter */
+  margin-right: -15px; /* Adjust as needed for gutter */
+}
+
+.custom-column {
+  flex: 1; /* Each column will take up equal space */
+  padding-left: 15px; /* Adjust as needed for gutter */
+  padding-right: 15px; /* Adjust as needed for gutter */
+  /* You might want to add a min-width if you don't want them to get too narrow */
+  /* min-width: 300px; */
+}
+
+/* Optional: Media query for stacking columns on smaller screens */
+@media screen and (max-width: 768px) {
+  .custom-column {
+    flex: 100%; /* Columns take full width and stack */
+  }
+}
