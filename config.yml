@@ -31,7 +31,9 @@ params:
   title: home
   description: "homepage"
   keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software, Product, Privacy]
-  author: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
+  author:
+    name: Andreas Neumeier  # author: ["Me", "You"] # multiple authors
+  contact: andreas@neumeier.org
   # images: ["/Transparent Logo.png"]
   DateFormat: "January 2, 2026"
   defaultTheme: auto # dark, light
