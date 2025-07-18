@@ -23,7 +23,7 @@ params:
     description: "Product / Privacy" # Set site description, used in meta tags and JSON-LD
     favicon: "" # Relative path to favicon in json feed, no leading slash.
     feedlinks: true # Show feed links in the footer.
-    footer: "1999 - 2005 - [neumeier.org](https://neumeier.org/)."
+    footer: "1999 - 2005 - [neumeier.org](https://neumeier.org/) - [imprint](https://neumeier.org/imprint) - [privacy](https://neumeier.org/privacy)"."
     icon: "" # Relative path to icon in json feed and JSON-LD, no leading slash.
     image: "" # Relative path to site image in JSON-LD, no leading slash.
     imageMaxWidth: "" # Max width for images added via figure shortcode.
@@ -77,3 +77,11 @@ params:
         cdn: # CDN url, no slash on end (https://cdn.example.org).
         local: false # Are the audio files local (true) or remote (false), default to true.
         preload: metadata # Set on the HTML5 audio tag, defaults to "metadata".
+
+
+repository:
+    branch: "main"
+    owner: "andreasofthings"
+    repo: "neumeier.org"
+    urlPatternEdit: "https://github.com/%s/%s/edit/%s/%s"
+    urlPatternView: "https://github.com/%s/%s/blob/%s/%s"
