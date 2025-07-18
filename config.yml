@@ -23,7 +23,7 @@ menus:
           pageRef: /posts
           weight: 20
         - name: Imprint
-          pageRef: /imprint
+          pageRef: /posts/imprint
           weight: 30
 
 params:
