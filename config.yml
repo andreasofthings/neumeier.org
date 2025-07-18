@@ -10,8 +10,8 @@ params:
         url: https://neumeier.org/andreas # https://example.org/somepage
         avatar: # path/to/some-image.jpg
     blogSections: # Sections whose <schema.org> `JSON+LD` in the page `<head>`
-        # - blog                  # will be `@type: BlogPosting`.
-        - post # Defaults to a list including only 'post' and 'blog'.
+        - blog # will be `@type: BlogPosting`.
+        - pages # Defaults to a list including only 'post' and 'blog'.
     breadcrumbSections: # Sections in which pages will have a `BreadcrumbListing`
         - section2 # in the <schema.org> `JSON+LD` in the page's `<head>`.
         - section3 # This theme requires Hugo `v0.109.0` or higher to
