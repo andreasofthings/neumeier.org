@@ -19,8 +19,8 @@ menus:
         - name: Home
           pageRef: /
           weight: 10
-        - name: Pages
-          pageRef: /pages
+        - name: Posts
+          pageRef: /posts
           weight: 20
         - name: Imprint
           pageRef: /imprint
