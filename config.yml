@@ -14,6 +14,18 @@ outputs:
     home: ["HTML", "RSS", "JSON", "SearchIndex"]
     section: ["HTML", "RSS", "JSON"]
 
+menus:
+    main:
+        - name: Home
+          pageRef: /
+          weight: 10
+        - name: Pages
+          pageRef: /pages
+          weight: 20
+        - name: Imprint
+          pageRef: /imprint
+          weight: 30
+
 params:
     alpine: true # Add AlpineJS, default false.
     author:
