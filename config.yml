@@ -3,6 +3,17 @@ languageCode: "en-us"
 title: "neumeier.org"
 theme: "zen" # https://github.com/frjo/hugo-theme-zen
 
+outputFormats:
+    SearchIndex:
+        mediaType: "application/json"
+        baseName: "searchindex"
+        isPlainText: true
+        notAlternative: true
+
+outputs:
+    home: ["HTML", "RSS", "JSON", "SearchIndex"]
+    section: ["HTML", "RSS", "JSON"]
+
 params:
     alpine: true # Add AlpineJS, default false.
     author:
@@ -10,7 +21,7 @@ params:
         url: https://neumeier.org/andreas # https://example.org/somepage
         avatar: # path/to/some-image.jpg
     blogSections: # Sections whose <schema.org> `JSON+LD` in the page `<head>`
-        - blog # will be `@type: BlogPosting`.
+        # - blog # will be `@type: BlogPosting`.
         - pages # Defaults to a list including only 'post' and 'blog'.
     breadcrumbSections: # Sections in which pages will have a `BreadcrumbListing`
         - section2 # in the <schema.org> `JSON+LD` in the page's `<head>`.
@@ -20,8 +31,8 @@ params:
     contact: "andreas@neumeier.org"
     dateformat: "2 January, 2006" # Set the date format, default to "2 January, 2006"
     description: "Product / Privacy" # Set site description, used in meta tags and JSON-LD
-    favicon: "" # Relative path to favicon in json feed, no leading slash.
-    feedlinks: "" # Show feed links in the footer.
+    favicon: "apple-touch-icon.png" # Relative path to favicon in json feed, no leading slash.
+    feedlinks: true # Show feed links in the footer.
     footer: "1999 - 2005 - [neumeier.org](https://neumeier.org/) - [imprint](https://neumeier.org/imprint) - [privacy](https://neumeier.org/privacy)"
     icon: "" # Relative path to icon in json feed and JSON-LD, no leading slash.
     image: "" # Relative path to site image in JSON-LD, no leading slash.
