@@ -6,3 +6,4 @@ description: "Search this site."
 summary: "search"
 placeholder: "search this site"
 ---
+{{< search >}}
