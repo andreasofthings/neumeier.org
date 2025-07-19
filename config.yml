@@ -68,7 +68,7 @@ params:
     mobileMenu: true # Turn on a mobile menu on small screens, default false.
     mobileMenuOutline: true # Mobil menu button as outline, default false.
     piwikSiteId: 3 # Matomo site id
-    piwikTrackerUrl: "ihttps://track.pramari.de" # Matomo url, schemaless and no slash on end (example.org/matomo).
+    piwikTrackerUrl: "https://track.pramari.de" # Matomo url, schemaless and no slash on end (example.org/matomo).
     plausibleSiteID: "" # Plausible site id/domain.
     plausibleTrackerURL: "" # Plausible url, schemaless and no slash on end. Optional, defaults to "plausible.io/…"
     poweredby: false # Show powered by hugo in footer

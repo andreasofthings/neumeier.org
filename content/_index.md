@@ -7,7 +7,7 @@ title: "Product / Privacy."
 
 ## Talk to me
 
-{{< Button src="https://calendar.app.google/HtmDbH3wV4EcPjUX7" text"Ideation" >}} - {{ <Button src="https://pramari.de/pages/product" text="Product" >}} - {{ <Button src="https://pramari.de/pages/privacy" text="Privacy" /> }}
+{{< Button src="https://calendar.app.google/HtmDbH3wV4EcPjUX7" text"Ideation" >}} - {{ <Button src="https://pramari.de/pages/product" text="Product" >}} - {{ <Button src="https://neumeier.org/privacy" text="Privacy" /> }}
 
 ## Contact
 
