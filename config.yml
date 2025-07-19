@@ -31,9 +31,9 @@ params:
     author:
         name: Andreas # Your Name
         url: https://neumeier.org/andreas # https://example.org/somepage
-        avatar: # path/to/some-image.jpg
-    # blogSections: # Sections whose <schema.org> `JSON+LD` in the page `<head>`
-    # - blog # will be `@type: BlogPosting`.
+        avatar: https://neumeier.org/path44.png
+    blogSections: # Sections whose <schema.org> `JSON+LD` in the page `<head>`
+        - blog # will be `@type: BlogPosting`.
     # - pages # Defaults to a list including only 'post' and 'blog'.
     breadcrumbSections: # Sections in which pages will have a `BreadcrumbListing`
         - section2 # in the <schema.org> `JSON+LD` in the page's `<head>`.
@@ -73,8 +73,8 @@ params:
     relatedposts: true # Show related posts under a "See also" section, default false.
     sassTranspiler: "dartsass" # The Sass transpiler to use, default "libsass".
     searchLimit: 20 # Max number of search hits, default 20.
-    sidebar: true # Show a sidebar to the right, default false.
-    siteName: false # Hide the site name (visually-hidden), default true.
+    sidebar: false # Show a sidebar to the right, default false.
+    siteName: true # Hide the site name (visually-hidden), default true.
     submitted: true # Show author and date information for a post.
     themeColor: # Hex color value, used in meta tags, default "#ffffff".
     umbrella: true # Add Umbrella JS, default false.
