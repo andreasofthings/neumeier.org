@@ -5,9 +5,9 @@ title: "Product / Privacy."
 
 # Product / Privacy.
 
-## Talk to me about
+## Talk to me
 
-<Button src="https://calendar.app.google/HtmDbH3wV4EcPjUX7" text="Ideation" />  - {{ <Button src="https://pramari.de" text="Product" /> }} - {{ <Button src="https://pramari.de" text="Privacy" /> }}
+{{<Button src="https://pramari.de" text="Product" >}} - {{ <Button src="https://pramari.de" text="Privacy" /> }}
 
 ## Contact
 
