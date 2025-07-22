@@ -1,0 +1,209 @@
+/* Product Management Handbook Custom Styles */
+
+/* Section-specific styling for productmanagement pages */
+.single-view--productmanagement {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Main title styling for PM handbook */
+.single-view--productmanagement h1.title {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: -0.025em;
+}
+
+/* Subtitle and description styling */
+.single-view--productmanagement p:first-of-type {
+  font-size: 1.25rem;
+  color: #64748b;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 3rem;
+  font-style: italic;
+}
+
+/* Section headers */
+.single-view--productmanagement h2 {
+  color: #475569;
+  border-bottom: 3px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.single-view--productmanagement h2::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+/* Subsection headers */
+.single-view--productmanagement h3 {
+  color: #334155;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+/* List styling */
+.single-view--productmanagement ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.single-view--productmanagement ul > li {
+  list-style: none;
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.single-view--productmanagement ul > li::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* Nested list items */
+.single-view--productmanagement ul ul li {
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.single-view--productmanagement ul ul li::before {
+  content: '•';
+  color: #94a3b8;
+}
+
+/* Link styling */
+.single-view--productmanagement a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.single-view--productmanagement a:hover {
+  color: #5a67d8;
+  border-bottom-color: #5a67d8;
+}
+
+/* Special styling for the "Part" headers */
+.single-view--productmanagement h3:has(+ ul) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+/* Card-like styling for main sections */
+.single-view--productmanagement > h3:not(:first-child) {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin: 2rem -0.5rem 1rem -0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #667eea;
+}
+
+/* Horizontal rule styling */
+.single-view--productmanagement hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 3rem 0;
+  border-radius: 1px;
+}
+
+/* Quote/callout styling */
+.single-view--productmanagement blockquote,
+.single-view--productmanagement em:last-child {
+  background: #f1f5f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  font-style: italic;
+  margin: 2rem 0;
+  color: #475569;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Strong text highlighting */
+.single-view--productmanagement strong {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+/* Code styling */
+.single-view--productmanagement code {
+  background: #e2e8f0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .single-view--productmanagement {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+  }
+
+  .single-view--productmanagement h1.title {
+    font-size: 2rem;
+  }
+
+  .single-view--productmanagement p:first-of-type {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .single-view--productmanagement ul > li {
+    padding-left: 1.5rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .single-view--productmanagement {
+    background: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+  }
+
+  .single-view--productmanagement h1.title {
+    color: #000 !important;
+    -webkit-text-fill-color: initial !important;
+  }
+}

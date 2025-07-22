@@ -1,0 +1,299 @@
+{{ define "main" -}}
+<main class="main layout__main handbook-main">
+    <div class="handbook-container">
+        <header class="handbook-header">
+            <div class="handbook-badge">📚 HANDBOOK</div>
+            <h1 class="handbook-title">{{ .Title }}</h1>
+            <p class="handbook-subtitle">{{ .Params.description }}</p>
+        </header>
+
+        <div class="handbook-content">{{ .Content }}</div>
+
+        {{ if .Pages }}
+        <section class="handbook-sections">
+            <h2 class="sections-title">Available Sections</h2>
+            <div class="sections-grid">
+                {{ range .Pages.ByWeight }}
+                <div class="section-card">
+                    <div class="section-icon">
+                        {{ if eq .Params.icon "" }}📖{{ else }}{{ .Params.icon
+                        }}{{ end }}
+                    </div>
+                    <h3 class="section-title">
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </h3>
+                    <p class="section-description">
+                        {{ .Params.description | default .Summary }}
+                    </p>
+                    <div class="section-meta">
+                        {{ if .Params.difficulty }}
+                        <span
+                            class="difficulty difficulty-{{ .Params.difficulty }}"
+                            >{{ .Params.difficulty | title }}</span
+                        >
+                        {{ end }} {{ if .Params.duration }}
+                        <span class="duration">{{ .Params.duration }}</span>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+
+        <div class="handbook-footer">
+            <div class="footer-stats">
+                <div class="stat">
+                    <span class="stat-number">{{ len .Pages }}</span>
+                    <span class="stat-label">Chapters</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">{{ .WordCount }}</span>
+                    <span class="stat-label">Words</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">{{ .ReadingTime }}</span>
+                    <span class="stat-label">Min Read</span>
+                </div>
+            </div>
+
+            {{ if .Params.lastmod }}
+            <div class="last-updated">
+                Last updated:
+                <time datetime="{{ .Params.lastmod }}"
+                    >{{ .Params.lastmod.Format "January 2, 2006" }}</time
+                >
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <style>
+        .handbook-main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .handbook-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow:
+                0 10px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .handbook-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .handbook-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .handbook-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .handbook-subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .handbook-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .sections-title {
+            color: #1e293b;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .section-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .section-title a:hover {
+            color: #667eea;
+        }
+
+        .section-description {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .section-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .difficulty {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .difficulty-beginner {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .difficulty-intermediate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .difficulty-advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .duration {
+            padding: 0.25rem 0.5rem;
+            background: #f1f5f9;
+            color: #475569;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .handbook-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .last-updated {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .handbook-container {
+                padding: 1.5rem;
+            }
+
+            .handbook-title {
+                font-size: 2rem;
+            }
+
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .handbook-footer {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-stats {
+                gap: 1rem;
+            }
+        }
+    </style>
+</main>
+{{ end -}}
