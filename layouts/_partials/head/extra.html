@@ -1,0 +1,8 @@
+{{/* Custom head extra partial for additional CSS and scripts */}}
+
+{{/* Include Product Management custom CSS for productmanagement section */}}
+{{ if eq .Section "productmanagement" }}
+<link rel="stylesheet" href="{{ "css/productmanagement.css" | relURL }}">
+{{ end }}
+
+{{/* Add any other custom head elements here */}}

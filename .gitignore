@@ -7,3 +7,4 @@ go.mod
 public/
 *.deb
 resources/
+node_modules/
