@@ -9,8 +9,6 @@ class: "handbook-index"
 
 ---
 
-# The Product Management Handbook
-
 Welcome to the comprehensive Product Management Handbook—your complete guide to building exceptional products and leading high-performing product teams.
 
 ## About This Handbook
