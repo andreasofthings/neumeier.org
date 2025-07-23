@@ -91,3 +91,11 @@ All things 'P'
 
  - [I want hue](https://medialab.github.io/iwanthue/)
  - [colorbrewer2](https://colorbrewer2.org/)
+
+
+# Random
+
+2025-07-23 [How To Make An Amazing Among Us Game From Cardboard | DIY Cardboard Games](https://youtu.be/CX_4r8rAwos) #cardboard #game 
+2025-07-23 [EU-weites Überwachungsnetz schon in der Aufbauphase](https://fm4.orf.at/stories/3024478/) #surveilance 
+2025-07-23 [Best Open Source CRM Software for 2025: Top 8 Picks Reviewed](https://crm.org/crmland/open-source-crm) #opensource
+    
