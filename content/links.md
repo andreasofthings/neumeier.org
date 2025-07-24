@@ -95,11 +95,11 @@ All things 'P'
 
 # Random
 
-2025-07-23 [How To Make An Amazing Among Us Game From Cardboard | DIY Cardboard Games](https://youtu.be/CX_4r8rAwos) #cardboard #game
-2025-07-23 [EU-weites Überwachungsnetz schon in der Aufbauphase](https://fm4.orf.at/stories/3024478/) #surveilance
-2025-07-23 [Best Open Source CRM Software for 2025: Top 8 Picks Reviewed](https://crm.org/crmland/open-source-crm) #opensource
-2025-07-24 [Decentralized Web Platform - Public](https://docs.google.com/presentation/d/1SaHGyY9TjPg4a0VNLCsfchoVG1yU3ffTDsPRcU99H1E/edit?slide=id.g11d24dbeb84_0_0#slide=id.g11d24dbeb84_0_0) #web3 #web5
-2025-07-24 [EU-Kommission nimmt hohe Fehlerquoten bei Chatkontrolle in Kauf](https://netzpolitik.org/2022/geleakter-bericht-eu-kommission-nimmt-hohe-fehlerquoten-bei-chatkontrolle-in-kauf/) #2022 #chatkontrolle
-2025-07-24 [Tech Debt? I don't believe it exists.](https://dadrian.io/blog/posts/tech-debt/) #tech #debt
-2025-07-24 [Hackers against Climate Change](https://hacc.earth) #climate #hack #theplanet
-2027-07-24 [Wasni - Die Hoodie Manufaktur](https://www.wasni.de) #hoodie #shirt #cloth
+ 2025-07-23 [How To Make An Amazing Among Us Game From Cardboard | DIY Cardboard Games](https://youtu.be/CX_4r8rAwos) #cardboard #game
+ 2025-07-23 [EU-weites Überwachungsnetz schon in der Aufbauphase](https://fm4.orf.at/stories/3024478/) #surveilance
+ 2025-07-23 [Best Open Source CRM Software for 2025: Top 8 Picks Reviewed](https://crm.org/crmland/open-source-crm) #opensource
+ 2025-07-24 [Decentralized Web Platform - Public](https://docs.google.com/presentation/d/1SaHGyY9TjPg4a0VNLCsfchoVG1yU3ffTDsPRcU99H1E/edit?slide=id.g11d24dbeb84_0_0#slide=id.g11d24dbeb84_0_0) #web3 #web5
+ 2025-07-24 [EU-Kommission nimmt hohe Fehlerquoten bei Chatkontrolle in Kauf](https://netzpolitik.org/2022/geleakter-bericht-eu-kommission-nimmt-hohe-fehlerquoten-bei-chatkontrolle-in-kauf/) #2022 #chatkontrolle
+ 2025-07-24 [Tech Debt? I don't believe it exists.](https://dadrian.io/blog/posts/tech-debt/) #tech #debt
+ 2025-07-24 [Hackers against Climate Change](https://hacc.earth) #climate #hack #theplanet
+ 2027-07-24 [Wasni - Die Hoodie Manufaktur](https://www.wasni.de) #hoodie #shirt #cloth
