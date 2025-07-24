@@ -71,8 +71,8 @@ params:
     # icon: # "/path33.png" # Relative path to icon in json feed and JSON-LD, no leading slash.
     # logo: false # Turn off the logo, defaults to true.
     # logoPath: /path33.png # Relative path to site logo, defaults to "images/logo.png", no leading slash.
-    # logoHeight: # Set logo height, defaults to none.
-    # logoWidth: # Set logo width, defaults to none.
+    logoHeight: 32 # Set logo height, defaults to none.
+    logoWidth: 32 # Set logo width, defaults to none.
     # math: true # Turn on math typesetting with KaTeX, default false.
     # microUsername: "" # Your micro.blog username.
     # piwikSiteId: 3 # Matomo site id
