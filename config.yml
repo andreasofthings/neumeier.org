@@ -40,7 +40,7 @@ params:
         - "tags" # Set to empty if no section should be listed.
     blogSections: # Sections whose <schema.org> `JSON+LD` in the page `<head>`
         - blog # will be `@type: BlogPosting`.
-    # - pages # Defaults to a list including only 'post' and 'blog'.
+        # - pages # Defaults to a list including only 'post' and 'blog'.
     breadcrumbSections: # Sections in which pages will have a `BreadcrumbListing`
         - section2 # in the <schema.org> `JSON+LD` in the page's `<head>`.
         - section3 # This theme requires Hugo `v0.109.0` or higher to
@@ -59,18 +59,12 @@ params:
     jquery: true # Add jQuery, default false.
     languageDir: "" # Set ltr or rtl, defaults to ltr.
     logo: true # Turn off the logo, defaults to true.
-    logoPath: /path44.png # Relative path to site logo, defaults to "images/logo.png", no leading slash.
+    logoPath: /path33.png # Relative path to site logo, defaults to "images/logo.png", no leading slash.
     logoHeight: # Set logo height, defaults to none.
     logoWidth: # Set logo width, defaults to none.
-    math: true # Turn on math typesetting with KaTeX, default false.
     menuInHeader: true # Move the main menu to the header, default false.
-    microUsername: "" # Your micro.blog username.
     mobileMenu: true # Turn on a mobile menu on small screens, default false.
     mobileMenuOutline: true # Mobil menu button as outline, default false.
-    # piwikSiteId: 3 # Matomo site id
-    # piwikTrackerUrl: "https://track.pramari.de" # Matomo url, schemaless and no slash on end (example.org/matomo).
-    # plausibleSiteID: "" # Plausible site id/domain.
-    # plausibleTrackerURL: "" # Plausible url, schemaless and no slash on end. Optional, defaults to "plausible.io/…"
     poweredby: false # Show powered by hugo in footer
     privacyPolicyUrl: "/policy" # If set will add link to cookie consent form.
     relatedposts: true # Show related posts under a "See also" section, default false.
@@ -80,7 +74,13 @@ params:
     siteName: true # Hide the site name (visually-hidden), default true.
     submitted: true # Show author and date information for a post.
     themeColor: # Hex color value, used in meta tags, default "#ffffff".
-    umbrella: true # Add Umbrella JS, default false.
+    # math: true # Turn on math typesetting with KaTeX, default false.
+    # microUsername: "" # Your micro.blog username.
+    # piwikSiteId: 3 # Matomo site id
+    # piwikTrackerUrl: "https://track.pramari.de" # Matomo url, schemaless and no slash on end (example.org/matomo).
+    # plausibleSiteID: "" # Plausible site id/domain.
+    # plausibleTrackerURL: "" # Plausible url, schemaless and no slash on end. Optional, defaults to "plausible.io/…"
+    # umbrella: true # Add Umbrella JS, default false.
 
     podcast:
         title: # * Feed title, defaults to site title (iTunes).
