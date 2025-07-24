@@ -34,7 +34,7 @@ params:
     author:
         name: Andreas # Your Name
         url: https://neumeier.org/andreas # https://example.org/somepage
-        avatar: https://neumeier.org/path44.png
+        avatar: # https://neumeier.org/path44.png
     mainSections: # The sections you want to have listed on the front page.
         - "pages" # Default to the section with most content if not set.
         - "tags" # Set to empty if no section should be listed.
@@ -51,16 +51,11 @@ params:
     favicon: "apple-touch-icon.png" # Relative path to favicon in json feed, no leading slash.
     feedlinks: true # Show feed links in the footer.
     footer: "1999 - 2025 - [neumeier.org](https://neumeier.org/) - [imprint](https://neumeier.org/imprint) - [privacy](https://neumeier.org/privacy)"
-    # icon: "/path33.png" # Relative path to icon in json feed and JSON-LD, no leading slash.
     image: "" # Relative path to site image in JSON-LD, no leading slash.
     imageMaxWidth: "" # Max width for images added via figure shortcode.
     internalPagination: true # Use Hugos internal pagination template, default false.
     jquery: true # Add jQuery, default false.
     languageDir: "" # Set ltr or rtl, defaults to ltr.
-    logo: true # Turn off the logo, defaults to true.
-    logoPath: /path33.png # Relative path to site logo, defaults to "images/logo.png", no leading slash.
-    logoHeight: # Set logo height, defaults to none.
-    logoWidth: # Set logo width, defaults to none.
     menuInHeader: true # Move the main menu to the header, default false.
     mobileMenu: true # Turn on a mobile menu on small screens, default false.
     mobileMenuOutline: true # Mobil menu button as outline, default false.
@@ -73,6 +68,11 @@ params:
     siteName: true # Hide the site name (visually-hidden), default true.
     submitted: true # Show author and date information for a post.
     themeColor: # Hex color value, used in meta tags, default "#ffffff".
+    # icon: # "/path33.png" # Relative path to icon in json feed and JSON-LD, no leading slash.
+    # logo: false # Turn off the logo, defaults to true.
+    # logoPath: /path33.png # Relative path to site logo, defaults to "images/logo.png", no leading slash.
+    # logoHeight: # Set logo height, defaults to none.
+    # logoWidth: # Set logo width, defaults to none.
     # math: true # Turn on math typesetting with KaTeX, default false.
     # microUsername: "" # Your micro.blog username.
     # piwikSiteId: 3 # Matomo site id
