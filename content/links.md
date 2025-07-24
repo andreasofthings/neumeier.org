@@ -102,3 +102,4 @@ All things 'P'
 2025-07-24 [EU-Kommission nimmt hohe Fehlerquoten bei Chatkontrolle in Kauf](https://netzpolitik.org/2022/geleakter-bericht-eu-kommission-nimmt-hohe-fehlerquoten-bei-chatkontrolle-in-kauf/) #2022 #chatkontrolle
 2025-07-24 [Tech Debt? I don't believe it exists.](https://dadrian.io/blog/posts/tech-debt/) #tech #debt
 2025-07-24 [Hackers against Climate Change](https://hacc.earth) #climate #hack #theplanet
+2027-07-24 [Wasni - Die Hoodie Manufaktur](https://www.wasni.de) #hoodie #shirt #cloth
