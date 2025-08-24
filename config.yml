@@ -1,8 +1,8 @@
 baseURL: "https://www.neumeier.org/"
 languageCode: "en-us"
 title: "neumeier.org"
-theme: "zen" # https://github.com/frjo/hugo-theme-zen
-# theme: "hugo-PaperMod"
+  # theme: "zen" # https://github.com/frjo/hugo-theme-zen
+theme: "hugo-PaperMod"
 
 
 params:
