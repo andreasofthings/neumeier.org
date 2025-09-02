@@ -23,16 +23,16 @@ ShowPostNavLinks: true
 ShowWordCount: true
 ShowRssButtonInSectionTermList: true
 UseHugoToc: true
-cover:
-    image: "static/imprint_cover.png" # image path/url
-    alt: "maps view of imprint address" # alt text
-    # caption: "<text>" # display caption under cover
-    relative: false # when using page bundles set this to true
-    hidden: true # only hide on current single page
-editPost:
-    URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/posts/imprint.md"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
+#cover:
+#    image: "static/imprint_cover.png" # image path/url
+#    alt: "maps view of imprint address" # alt text
+#    caption: "<text>" # display caption under cover
+#    relative: false # when using page bundles set this to true
+#    hidden: true # only hide on current single page
+# editPost:
+#     URL: "https://github.com/andreasofthings/neumeier.org/blob/main/content/posts/imprint.md"
+#     Text: "Suggest Changes" # edit text
+#     appendFilePath: true # to append file path to Edit link
 ---
 
     Andreas Neumeier
