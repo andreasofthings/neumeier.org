@@ -56,14 +56,37 @@
             let matrixClient;
             let currentRoomId;
 
-            // Hardcoded values for the specific room
-            const homeserverUrl = "https://matrix.pramari.de";
+            const homeserverUrl = "https://pramari.de";
             const roomAlias = "#sauna:pramari.de";
 
-            // Wait for the DOM and the deferred script to be ready before executing anything
-            document.addEventListener("DOMContentLoaded", () => {
-                handleSsoCallback();
-            });
+            // This function actively waits for the Matrix SDK to be loaded and available on the window object.
+            // This is the definitive fix for the race condition.
+            function waitForSdkAndInitialize() {
+                const checkInterval = 100; // ms
+                const timeout = 5000; // ms
+                let elapsedTime = 0;
+
+                const sdkPoller = setInterval(() => {
+                    if (window.matrixcs) {
+                        clearInterval(sdkPoller);
+                        handleSsoCallback(); // SDK is ready, proceed with login logic
+                    } else {
+                        elapsedTime += checkInterval;
+                        if (elapsedTime >= timeout) {
+                            clearInterval(sdkPoller);
+                            logToUI(
+                                "Error: Matrix SDK failed to load in time.",
+                            );
+                        }
+                    }
+                }, checkInterval);
+            }
+
+            // Start the process once the basic HTML document is loaded.
+            document.addEventListener(
+                "DOMContentLoaded",
+                waitForSdkAndInitialize,
+            );
 
             function getBaseRedirectUrl() {
                 return window.location.origin + window.location.pathname;
@@ -71,23 +94,18 @@
 
             async function initiateSsoLogin() {
                 logToUI("Redirecting for SSO login...");
-
-                // Store the room alias for after the redirect
                 localStorage.setItem("sso_roomAlias", roomAlias);
 
-                // Construct the SSO redirect URL
                 const redirectUrl = getBaseRedirectUrl();
                 const ssoRedirectEndpoint =
                     homeserverUrl.replace(/\/$/, "") +
                     "/_matrix/client/r0/login/sso/redirect?redirectUrl=" +
                     encodeURIComponent(redirectUrl);
 
-                // Redirect the user
                 window.location.href = ssoRedirectEndpoint;
             }
 
             async function handleSsoCallback() {
-                // This function is now called after the DOM (and deferred scripts) are loaded
                 const urlParams = new URLSearchParams(window.location.search);
                 const loginToken = urlParams.get("loginToken");
                 const storedRoomAlias = localStorage.getItem("sso_roomAlias");
@@ -95,7 +113,6 @@
                 if (loginToken && storedRoomAlias) {
                     logToUI("SSO login token received. Completing login...");
 
-                    // Clean the loginToken from the URL and remove stored items
                     const cleanUrl = getBaseRedirectUrl();
                     window.history.replaceState({}, document.title, cleanUrl);
                     localStorage.removeItem("sso_roomAlias");
@@ -107,7 +124,6 @@
                     );
                 } else {
                     logToUI("Ready to login via SSO.");
-                    // Ensure login button is enabled if not already logged in
                     const loginButton = document.querySelector(
                         'button[onclick="initiateSsoLogin()"]',
                     );
@@ -121,7 +137,7 @@
                 roomAliasToJoin,
             ) {
                 try {
-                    // By placing the logic inside DOMContentLoaded, matrixcs should now be defined.
+                    // This is now safe to call because waitForSdkAndInitialize guarantees 'matrixcs' exists.
                     matrixClient = matrixcs.createClient({
                         baseUrl: homeserverUrl,
                     });
@@ -136,7 +152,6 @@
                     document.getElementById("userId").value =
                         loginResponse.user_id;
 
-                    // Update UI: Disable login button, enable chat fields
                     document.querySelector(
                         'button[onclick="initiateSsoLogin()"]',
                     ).disabled = true;
@@ -150,7 +165,6 @@
                     currentRoomId = room.roomId;
                     logToUI(`Successfully joined ${roomAliasToJoin}`);
 
-                    // Clear previous messages and initialize chat
                     document.getElementById("messages").innerHTML = "";
                     logToUI("Initializing Matrix client...");
 
@@ -164,10 +178,10 @@
                                 event.getType() !== "m.room.message" ||
                                 room.roomId !== currentRoomId
                             ) {
-                                return; // Only process new text messages for the current room
+                                return;
                             }
                             if (toStartOfTimeline) {
-                                return; // Don't process paginated results
+                                return;
                             }
                             const sender = event.getSender();
                             const messageBody = event.getContent().body;
@@ -178,14 +192,12 @@
                     matrixClient.once("sync", function (state, prevState, res) {
                         if (state === "PREPARED") {
                             logToUI(
-                                "Client synced and ready. You can now send/receive messages.",
+                                "Client synced. You can now send/receive messages.",
                             );
                         } else if (state === "ERROR") {
                             logToUI(
                                 `Sync error: ${res ? res.error : "Unknown error"}`,
                             );
-                        } else {
-                            logToUI(`Sync state: ${state}`);
                         }
                     });
                 } catch (error) {
@@ -193,7 +205,6 @@
                         `Error during SSO login or chat setup: ${error.message || error.toString()}`,
                     );
                     console.error("SSO Login/Chat Setup Error:", error);
-                    // Re-enable relevant UI elements for another attempt
                     const loginButton = document.querySelector(
                         'button[onclick="initiateSsoLogin()"]',
                     );
@@ -223,7 +234,6 @@
                 };
 
                 try {
-                    logToUI("Sending message...");
                     matrixClient.sendEvent(
                         currentRoomId,
                         "m.room.message",
@@ -247,7 +257,7 @@
                 const messagesDiv = document.getElementById("messages");
                 const messageDiv = document.createElement("div");
                 if (isChatMessage) {
-                    const parts = message.split(/:(.*)/s); // Split only on the first colon
+                    const parts = message.split(/:(.*)/s);
                     const sender = parts[0];
                     const msg = parts[1] || "";
                     messageDiv.innerHTML = `<span class="sender">${sender}:</span> <span class="text">${msg}</span>`;
@@ -256,7 +266,7 @@
                 }
                 messageDiv.classList.add("message");
                 messagesDiv.appendChild(messageDiv);
-                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to bottom
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
             }
         </script>
     </body>
