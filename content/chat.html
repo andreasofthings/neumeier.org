@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Matrix Sauna Chat</title>
+        <script src="https://unpkg.com/matrix-js-sdk/lib/browser-index.js"></script>
+        <style>
+            body {
+                font-family: sans-serif;
+                margin: 20px;
+            }
+            #messages {
+                border: 1px solid #ccc;
+                padding: 10px;
+                height: 300px;
+                overflow-y: scroll;
+                margin-bottom: 10px;
+            }
+            .message {
+                margin-bottom: 5px;
+            }
+            .message.sender {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Matrix Sauna Chat</h1>
+        <p>A minimal client exclusively for the #sauna:pramari.de room.</p>
+
+        <div>
+            <label for="userId">User ID:</label>
+            <input
+                type="text"
+                id="userId"
+                placeholder="Will be filled after SSO"
+                readonly
+            />
+        </div>
+        <button onclick="initiateSsoLogin()">Login with SSO & Join Chat</button>
+
+        <hr />
+
+        <div id="messages"></div>
+        <input
+            type="text"
+            id="messageInput"
+            placeholder="Type a message..."
+            disabled
+        />
+        <button onclick="sendMessage()" disabled>Send</button>
+
+        <script>
+            let matrixClient;
+            let currentRoomId;
+
+            // Hardcoded values for the specific room
+            const homeserverUrl = "https://matrix.pramari.de";
+            const roomAlias = "#sauna:pramari.de";
+
+            // Run on page load to handle SSO callback
+            window.onload = handleSsoCallback;
+
+            function getBaseRedirectUrl() {
+                return window.location.origin + window.location.pathname;
+            }
+
+            async function initiateSsoLogin() {
+                logToUI("Redirecting for SSO login...");
+
+                // Store the room alias for after the redirect
+                localStorage.setItem("sso_roomAlias", roomAlias);
+
+                // Construct the SSO redirect URL
+                const redirectUrl = getBaseRedirectUrl();
+                const ssoRedirectEndpoint =
+                    homeserverUrl.replace(/\/$/, "") +
+                    "/_matrix/client/r0/login/sso/redirect?redirectUrl=" +
+                    encodeURIComponent(redirectUrl);
+
+                // Redirect the user
+                window.location.href = ssoRedirectEndpoint;
+            }
+
+            async function handleSsoCallback() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const loginToken = urlParams.get("loginToken");
+                const storedRoomAlias = localStorage.getItem("sso_roomAlias");
+
+                if (loginToken && storedRoomAlias) {
+                    logToUI("SSO login token received. Completing login...");
+
+                    // Clean the loginToken from the URL and remove stored items
+                    const cleanUrl = getBaseRedirectUrl();
+                    window.history.replaceState({}, document.title, cleanUrl);
+                    localStorage.removeItem("sso_roomAlias");
+
+                    await completeSsoLoginAndStartChat(
+                        homeserverUrl,
+                        loginToken,
+                        storedRoomAlias,
+                    );
+                } else {
+                    logToUI("Ready to login via SSO.");
+                    // Ensure login button is enabled if not already logged in
+                    const loginButton = document.querySelector(
+                        'button[onclick="initiateSsoLogin()"]',
+                    );
+                    if (loginButton) loginButton.disabled = false;
+                }
+            }
+
+            async function completeSsoLoginAndStartChat(
+                homeserverUrl,
+                loginToken,
+                roomAliasToJoin,
+            ) {
+                try {
+                    matrixClient = matrixcs.createClient({
+                        baseUrl: homeserverUrl,
+                    });
+
+                    logToUI("Logging in with SSO token...");
+                    const loginResponse = await matrixClient.login(
+                        "m.login.sso",
+                        { token: loginToken },
+                    );
+
+                    logToUI(`Logged in as ${loginResponse.user_id}`);
+                    document.getElementById("userId").value =
+                        loginResponse.user_id;
+
+                    // Update UI: Disable login button, enable chat fields
+                    document.querySelector(
+                        'button[onclick="initiateSsoLogin()"]',
+                    ).disabled = true;
+                    document.getElementById("messageInput").disabled = false;
+                    document.querySelector(
+                        'button[onclick="sendMessage()"]',
+                    ).disabled = false;
+
+                    logToUI(`Joining room ${roomAliasToJoin}...`);
+                    const room = await matrixClient.joinRoom(roomAliasToJoin);
+                    currentRoomId = room.roomId;
+                    logToUI(`Successfully joined ${roomAliasToJoin}`);
+
+                    // Clear previous messages and initialize chat
+                    document.getElementById("messages").innerHTML = "";
+                    logToUI("Initializing Matrix client...");
+
+                    logToUI("Starting client and syncing...");
+                    await matrixClient.startClient({ initialSyncLimit: 10 });
+
+                    matrixClient.on(
+                        "Room.timeline",
+                        function (event, room, toStartOfTimeline) {
+                            if (
+                                event.getType() !== "m.room.message" ||
+                                room.roomId !== currentRoomId
+                            ) {
+                                return; // Only process new text messages for the current room
+                            }
+                            if (toStartOfTimeline) {
+                                return; // Don't process paginated results
+                            }
+                            const sender = event.getSender();
+                            const messageBody = event.getContent().body;
+                            logToUI(`${sender}: ${messageBody}`, true);
+                        },
+                    );
+
+                    matrixClient.once("sync", function (state, prevState, res) {
+                        if (state === "PREPARED") {
+                            logToUI(
+                                "Client synced and ready. You can now send/receive messages.",
+                            );
+                        } else if (state === "ERROR") {
+                            logToUI(
+                                `Sync error: ${res ? res.error : "Unknown error"}`,
+                            );
+                        } else {
+                            logToUI(`Sync state: ${state}`);
+                        }
+                    });
+                } catch (error) {
+                    logToUI(
+                        `Error during SSO login or chat setup: ${error.message || error.toString()}`,
+                    );
+                    console.error("SSO Login/Chat Setup Error:", error);
+                    // Re-enable relevant UI elements for another attempt
+                    const loginButton = document.querySelector(
+                        'button[onclick="initiateSsoLogin()"]',
+                    );
+                    if (loginButton) loginButton.disabled = false;
+                    document.getElementById("messageInput").disabled = true;
+                    document.querySelector(
+                        'button[onclick="sendMessage()"]',
+                    ).disabled = true;
+                }
+            }
+
+            async function sendMessage() {
+                if (!matrixClient || !currentRoomId) {
+                    alert("Client not started or Room not joined.");
+                    return;
+                }
+                const messageInput = document.getElementById("messageInput");
+                const messageText = messageInput.value;
+
+                if (!messageText.trim()) {
+                    return;
+                }
+
+                const content = {
+                    body: messageText,
+                    msgtype: "m.text",
+                };
+
+                try {
+                    logToUI("Sending message...");
+                    matrixClient.sendEvent(
+                        currentRoomId,
+                        "m.room.message",
+                        content,
+                        "",
+                        (err, res) => {
+                            if (err) {
+                                logToUI(`Error sending message: ${err}`);
+                                console.error("Send event error:", err);
+                            }
+                        },
+                    );
+                    messageInput.value = "";
+                } catch (error) {
+                    logToUI(`Error sending message: ${error.toString()}`);
+                    console.error("Error in sendMessage:", error);
+                }
+            }
+
+            function logToUI(message, isChatMessage = false) {
+                const messagesDiv = document.getElementById("messages");
+                const messageDiv = document.createElement("div");
+                if (isChatMessage) {
+                    const parts = message.split(/:(.*)/s); // Split only on the first colon
+                    const sender = parts[0];
+                    const msg = parts[1] || "";
+                    messageDiv.innerHTML = `<span class="sender">${sender}:</span> <span class="text">${msg}</span>`;
+                } else {
+                    messageDiv.textContent = ` ${message}`;
+                }
+                messageDiv.classList.add("message");
+                messagesDiv.appendChild(messageDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to bottom
+            }
+        </script>
+    </body>
+</html>
+
