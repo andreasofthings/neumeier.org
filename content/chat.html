@@ -60,8 +60,10 @@
             const homeserverUrl = "https://matrix.pramari.de";
             const roomAlias = "#sauna:pramari.de";
 
-            // Run on page load to handle SSO callback
-            window.onload = handleSsoCallback;
+            // Wait for the DOM and the deferred script to be ready before executing anything
+            document.addEventListener("DOMContentLoaded", () => {
+                handleSsoCallback();
+            });
 
             function getBaseRedirectUrl() {
                 return window.location.origin + window.location.pathname;
@@ -85,6 +87,7 @@
             }
 
             async function handleSsoCallback() {
+                // This function is now called after the DOM (and deferred scripts) are loaded
                 const urlParams = new URLSearchParams(window.location.search);
                 const loginToken = urlParams.get("loginToken");
                 const storedRoomAlias = localStorage.getItem("sso_roomAlias");
@@ -118,6 +121,7 @@
                 roomAliasToJoin,
             ) {
                 try {
+                    // By placing the logic inside DOMContentLoaded, matrixcs should now be defined.
                     matrixClient = matrixcs.createClient({
                         baseUrl: homeserverUrl,
                     });
