@@ -58,13 +58,37 @@
             let matrixClient;
             let currentRoomId;
 
-            const homeserverUrl = "https://matrix.pramari.de";
+            const homeserverUrl = "https://pramari.de";
             const roomAlias = "#sauna:pramari.de";
 
-            // With the SDK script loaded just above, we can safely initialize on DOMContentLoaded.
+            // Wait for both DOM and script to be ready
+            let domReady = false;
+            let scriptReady = false;
+
+            function checkReady() {
+                if (domReady && scriptReady) {
+                    handleSsoCallback();
+                }
+            }
+
             document.addEventListener("DOMContentLoaded", () => {
-                handleSsoCallback();
+                domReady = true;
+                checkReady();
             });
+
+            // Check if script is already loaded, or wait for it
+            function waitForScript() {
+                if (typeof matrixcs !== "undefined") {
+                    console.log("Matrix SDK loaded successfully");
+                    scriptReady = true;
+                    checkReady();
+                } else {
+                    console.log("Waiting for Matrix SDK to load...");
+                    setTimeout(waitForScript, 100);
+                }
+            }
+
+            waitForScript();
 
             function getBaseRedirectUrl() {
                 return window.location.origin + window.location.pathname;
@@ -115,7 +139,25 @@
                 roomAliasToJoin,
             ) {
                 try {
-                    // matrixcs is now guaranteed to be available.
+                    // Check if matrixcs is available
+                    if (typeof matrixcs === "undefined") {
+                        logToUI(
+                            "Error: Matrix SDK not loaded. Checking what's available...",
+                        );
+                        logToUI(
+                            "Available globals: " +
+                                Object.keys(window)
+                                    .filter((k) => k.includes("matrix"))
+                                    .join(", "),
+                        );
+                        throw new Error(
+                            "Matrix SDK not loaded. Please check your internet connection and try again.",
+                        );
+                    }
+
+                    logToUI(
+                        "Matrix SDK loaded successfully. Creating client...",
+                    );
                     matrixClient = matrixcs.createClient({
                         baseUrl: homeserverUrl,
                     });
