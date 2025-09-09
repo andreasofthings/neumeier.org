@@ -2,10 +2,6 @@
 <html>
     <head>
         <title>Matrix Sauna Chat</title>
-        <script
-            src="https://unpkg.com/matrix-js-sdk@24.0.0/lib/browser-index.js"
-            defer
-        ></script>
         <style>
             body {
                 font-family: sans-serif;
@@ -52,41 +48,23 @@
         />
         <button onclick="sendMessage()" disabled>Send</button>
 
+        <!--
+        By moving the SDK script to the end of the body and removing 'defer',
+        we ensure it is downloaded and executed before our inline script runs.
+        This is a classic and reliable way to handle script dependencies.
+        -->
+        <script src="https://unpkg.com/matrix-js-sdk@24.0.0/lib/browser-index.js"></script>
         <script>
             let matrixClient;
             let currentRoomId;
 
-            const homeserverUrl = "https://pramari.de";
+            const homeserverUrl = "https://matrix.pramari.de";
             const roomAlias = "#sauna:pramari.de";
 
-            // This function actively waits for the Matrix SDK to be loaded and available on the window object.
-            // This is the definitive fix for the race condition.
-            function waitForSdkAndInitialize() {
-                const checkInterval = 100; // ms
-                const timeout = 5000; // ms
-                let elapsedTime = 0;
-
-                const sdkPoller = setInterval(() => {
-                    if (window.matrixcs) {
-                        clearInterval(sdkPoller);
-                        handleSsoCallback(); // SDK is ready, proceed with login logic
-                    } else {
-                        elapsedTime += checkInterval;
-                        if (elapsedTime >= timeout) {
-                            clearInterval(sdkPoller);
-                            logToUI(
-                                "Error: Matrix SDK failed to load in time.",
-                            );
-                        }
-                    }
-                }, checkInterval);
-            }
-
-            // Start the process once the basic HTML document is loaded.
-            document.addEventListener(
-                "DOMContentLoaded",
-                waitForSdkAndInitialize,
-            );
+            // With the SDK script loaded just above, we can safely initialize on DOMContentLoaded.
+            document.addEventListener("DOMContentLoaded", () => {
+                handleSsoCallback();
+            });
 
             function getBaseRedirectUrl() {
                 return window.location.origin + window.location.pathname;
@@ -137,7 +115,7 @@
                 roomAliasToJoin,
             ) {
                 try {
-                    // This is now safe to call because waitForSdkAndInitialize guarantees 'matrixcs' exists.
+                    // matrixcs is now guaranteed to be available.
                     matrixClient = matrixcs.createClient({
                         baseUrl: homeserverUrl,
                     });
