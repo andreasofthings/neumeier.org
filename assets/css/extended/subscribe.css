@@ -1,3 +1,9 @@
+.subscribe-wrapper {
+    width: fit-content;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
 .subscribe-podlove {
     margin-top: 0em;
     display: block;
@@ -13,33 +19,35 @@
     font: bold 0.8em sans-serif;
 }
 
-.subscribe-buttondown button, input {
-  font-family: inherit;
-  font-size: 100%;
+.subscribe-buttondown button,
+input {
+    font-family: inherit;
+    font-size: 100%;
 }
 
 .subscribe-buttondown input {
-  padding: 5px;
-  background: none;
-  cursor: pointer;
-  border: 2px solid #333;
-  border-radius: 5px;
+    padding: 5px;
+    background: none;
+    cursor: pointer;
+    border: 2px solid #333;
+    border-radius: 5px;
 }
 
 .subscribe-buttondown button {
-  padding: 5px;
-  background: none;
-  cursor: pointer;
-  border: 2px solid #333;
-  border-radius: 5px;
+    padding: 5px;
+    background: none;
+    cursor: pointer;
+    border: 2px solid #333;
+    border-radius: 5px;
 }
 
 .subscribe-buttondown button:after {
-  content: " >";
+    content: " >";
 }
 
-.subscribe-buttondown button:hover, button:focus {
-  transform: rotate(-1.5deg); 
-  background: #000;
-  color: #fff;
+.subscribe-buttondown button:hover,
+button:focus {
+    transform: rotate(-1.5deg);
+    background: #000;
+    color: #fff;
 }
