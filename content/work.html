@@ -22,6 +22,7 @@ const out = document.getElementById('out');
 const typingMin = 50; // ms per char (min)
 const typingMax = 70; // ms per char (max)
 const linePause = 600; // pause after full line
+const skipNewlineChance = 0.5; // 50% chance to skip adding a newline between lines
 
 function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -41,12 +42,20 @@ async function typeLine(currentText){
   let text = currentText;
   for(let i=0;i<phrase.length;i++){ 
     text += phrase[i];
-    render(text + '\n');
+    render(text);
     await sleep(randomTypingDelay());
     window.scrollTo(0, document.body.scrollHeight);
   }
   await sleep(linePause);
-  return text + '\n';
+  // decide whether to append a newline or skip it
+  if (Math.random() >= skipNewlineChance) {
+    text += '\n';
+    render(text);
+  } else {
+    // skipping newline: render as-is (no line break)
+    render(text);
+  }
+  return text;
 }
 
 (async function loop(){
