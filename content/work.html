@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Work — Andreas Neumeier</title>
 <style>
-  html,body{height:100%;margin:0;background:#111;color:#e6e6e6;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;}
+  html,body{height:100%;margin:0;background:#111;color:#e6e6e6;font-family: "Courier New", Courier, monospace;}
   .wrap{box-sizing:border-box;padding:40px;height:100%;overflow:auto;}
   .type{white-space:pre-wrap;font-size:1.5rem;line-height:1.6;}
   .cursor{display:inline-block;width:8px;background:#e6e6e6;margin-left:2px;animation:blink .8s steps(1) infinite;vertical-align:bottom}
@@ -34,7 +34,7 @@ async function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 
 async function typeLine(currentText){
   let text = currentText;
-  for(let i=0;i<phrase.length;i++){
+  for(let i=0;i<phrase.length;i++){ 
     text += phrase[i];
     render(text + '\n');
     await sleep(typingSpeed + Math.random()*40);
