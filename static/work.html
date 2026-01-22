@@ -14,6 +14,8 @@
                 font-family: "Courier New", Courier, monospace;
                 display: flex;
                 align-items: center;
+                padding: 0 40px;
+                box-sizing: border-box;
             }
             .wrap {
                 box-sizing: border-box;
@@ -21,7 +23,7 @@
                 width: 60%;
                 max-width: 800px;
                 max-height: 90vh;
-                overflow: auto;
+                /* overflow: auto; */
             }
             .type {
                 white-space: pre-wrap;
@@ -52,7 +54,7 @@
             const out = document.getElementById("out");
 
             const typingMin = 50; // ms per char (min)
-            const typingMax = 150; // ms per char (max)
+            const typingMax = 250; // ms per char (max)
             const linePause = 600; // pause after full line
 
             function escapeHtml(str) {
@@ -108,7 +110,7 @@
                 return word;
             }
 
-            async function typeText(text, currentText) {
+            async function typeText(text, currentText, lineCount) {
                 // type text character-by-character
                 let acc = currentText;
                 for (let i = 0; i < text.length; i++) {
@@ -117,7 +119,20 @@
                         i++;
                         let nextChar = text[i];
                         if (nextChar) {
-                            const top = char === "^" ? "-0.3em" : "0.3em";
+                            const minAmount = 0.05;
+                            const maxAmount = 0.3;
+                            const maxLines = 100;
+
+                            let amount =
+                                minAmount +
+                                (lineCount / maxLines) *
+                                    (maxAmount - minAmount);
+                            amount = Math.min(amount, maxAmount);
+                            amount = amount * (0.8 + Math.random() * 0.4); // Add some randomness
+
+                            const direction = char === "^" ? -1 : 1;
+                            const top = `${(direction * amount).toFixed(4)}em`;
+
                             acc += `<span style="position: relative; top: ${top};">${escapeHtml(
                                 nextChar,
                             )}</span>`;
@@ -163,7 +178,7 @@
                 // maybe add 1..2 leading whitespace
                 if (Math.random() < layoutGlitchChance) {
                     const leadCount = randInt(1, 2);
-                    acc = await typeText(" ".repeat(leadCount), acc);
+                    acc = await typeText(" ".repeat(leadCount), acc, lineCount);
                 }
 
                 // type words with possible 1..2 extra spaces between them
@@ -171,14 +186,18 @@
                 for (let w = 0; w < words.length; w++) {
                     let word = words[w];
                     word = glitchWord(word, wordGlitchChance);
-                    acc = await typeText(word, acc);
+                    acc = await typeText(word, acc, lineCount);
                     if (w < words.length - 1) {
                         // always type one normal space
-                        acc = await typeText(" ", acc);
+                        acc = await typeText(" ", acc, lineCount);
                         // maybe add one or two extra spaces
                         if (Math.random() < layoutGlitchChance) {
                             const extra = randInt(1, 2);
-                            acc = await typeText(" ".repeat(extra), acc);
+                            acc = await typeText(
+                                " ".repeat(extra),
+                                acc,
+                                lineCount,
+                            );
                         }
                     }
                 }
@@ -188,7 +207,7 @@
 
                 // decide whether to append newline or skip it
                 if (Math.random() >= layoutGlitchChance) {
-                    acc = await typeText("\n", acc);
+                    acc = await typeText("\n", acc, lineCount);
                 } else {
                     // skipping newline: render current state without adding '\n'
                     render(acc);
