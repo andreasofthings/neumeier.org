@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Work — Andreas Neumeier</title>
+<style>
+  html,body{height:100%;margin:0;background:#111;color:#e6e6e6;font-family: "Courier New", Courier, monospace;}
+  .wrap{box-sizing:border-box;padding:40px;height:100%;overflow:auto;}
+  .type{white-space:pre-wrap;font-size:1.5rem;line-height:1.6;}
+  .cursor{display:inline-block;width:8px;background:#e6e6e6;margin-left:2px;animation:blink .8s steps(1) infinite;vertical-align:bottom}
+  @keyframes blink{50%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<pre id="out" class="type"></pre>
+</div>
+<script>
+const phrase = "All work and no play makes Andreas a dull boy.";
+const out = document.getElementById('out');
+
+const typingMin = 50; // ms per char (min)
+const typingMax = 70; // ms per char (max)
+const linePause = 600; // pause after full line
+const skipNewlineChance = 0.5; // 50% chance to skip adding a newline between lines
+const addWhitespaceChance = 0.5; // 50% chance to add random whitespaces (leading and between words)
+
+function escapeHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function render(text){
+  out.innerHTML = escapeHtml(text) + '<span class="cursor"></span>';
+}
+
+async function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+function randomTypingDelay(){
+  return typingMin + Math.random() * (typingMax - typingMin);
+}
+
+function randInt(min, max){
+  return Math.floor(min + Math.random() * (max - min + 1));
+}
+
+async function typeText(text, currentText){
+  // type text character-by-character
+  let acc = currentText;
+  for (let i = 0; i < text.length; i++){
+    acc += text[i];
+    render(acc);
+    await sleep(randomTypingDelay());
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+  return acc;
+}
+
+async function typeLine(currentText){
+  let acc = currentText || '';
+  // maybe add 1..2 leading whitespace (50% chance)
+  if (Math.random() < addWhitespaceChance){
+    const leadCount = randInt(1,2);
+    acc = await typeText(' '.repeat(leadCount), acc);
+  }
+
+  // type words with possible 1..2 extra spaces between them (50% chance)
+  const words = phrase.split(' ');
+  for (let w = 0; w < words.length; w++){
+    const word = words[w];
+    acc = await typeText(word, acc);
+    if (w < words.length - 1){
+      // always type one normal space
+      acc = await typeText(' ', acc);
+      // maybe add one or two extra spaces (50% chance)
+      if (Math.random() < addWhitespaceChance){
+        const extra = randInt(1,2);
+        acc = await typeText(' '.repeat(extra), acc);
+      }
+    }
+  }
+
+  // end of line pause
+  await sleep(linePause);
+
+  // decide whether to append newline or skip it
+  if (Math.random() >= skipNewlineChance){
+    acc = await typeText('\n', acc);
+  } else {
+    // skipping newline: render current state without adding '\n'
+    render(acc);
+  }
+
+  return acc;
+}
+
+(async function loop(){
+  let acc = '';
+  while(true){
+    acc = await typeLine(acc);
+  }
+})();
+</script>
+</body>
+</html>
