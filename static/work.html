@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>Work — Andreas Neumeier</title>
+        <title>Work</title>
         <style>
             html,
             body {
@@ -53,7 +53,7 @@
             const out = document.getElementById("out");
 
             const typingMin = 50; // ms per char (min)
-            const typingMax = 70; // ms per char (max)
+            const typingMax = 150; // ms per char (max)
             const linePause = 600; // pause after full line
 
             function escapeHtml(str) {
@@ -64,8 +64,7 @@
             }
 
             function render(text) {
-                out.innerHTML =
-                    escapeHtml(text) + '<span class="cursor"></span>';
+                out.innerHTML = text + '<span class="cursor"></span>';
             }
 
             async function sleep(ms) {
@@ -87,7 +86,7 @@
                     let chars = word.split("");
                     const glitchType = Math.random();
 
-                    if (glitchType < 0.5) {
+                    if (glitchType < 0.33) {
                         // Swap letters
                         const pos1 = randInt(0, chars.length - 1);
                         let pos2 = randInt(0, chars.length - 1);
@@ -95,10 +94,15 @@
                             pos2 = randInt(0, chars.length - 1);
                         }
                         [chars[pos1], chars[pos2]] = [chars[pos2], chars[pos1]];
-                    } else {
+                    } else if (glitchType < 0.66) {
                         // Leave out a letter
                         const pos = randInt(0, chars.length - 1);
                         chars.splice(pos, 1);
+                    } else {
+                        // Add marker for up/down glitch
+                        const pos = randInt(0, chars.length - 1);
+                        const marker = Math.random() < 0.5 ? "^" : "_";
+                        chars[pos] = marker + chars[pos];
                     }
                     return chars.join("");
                 }
@@ -109,7 +113,21 @@
                 // type text character-by-character
                 let acc = currentText;
                 for (let i = 0; i < text.length; i++) {
-                    acc += text[i];
+                    let char = text[i];
+                    if (char === "^" || char === "_") {
+                        i++;
+                        let nextChar = text[i];
+                        if (nextChar) {
+                            const top = char === "^" ? "-0.3em" : "0.3em";
+                            acc += `<span style="position: relative; top: ${top};">${escapeHtml(
+                                nextChar,
+                            )}</span>`;
+                        } else {
+                            acc += escapeHtml(char); // dangling marker
+                        }
+                    } else {
+                        acc += escapeHtml(char);
+                    }
                     render(acc);
                     await sleep(randomTypingDelay());
                     out.parentNode.scrollTop = out.parentNode.scrollHeight;
