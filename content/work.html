@@ -19,7 +19,8 @@
 <script>
 const phrase = "All work and no play makes Andreas a dull boy.";
 const out = document.getElementById('out');
-const typingSpeed = 60; // ms per char
+const typingMin = 50; // ms per char (min)
+const typingMax = 70; // ms per char (max)
 const linePause = 600; // pause after full line
 
 function escapeHtml(str){
@@ -32,12 +33,16 @@ function render(text){
 
 async function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 
+function randomTypingDelay(){
+  return typingMin + Math.random() * (typingMax - typingMin);
+}
+
 async function typeLine(currentText){
   let text = currentText;
   for(let i=0;i<phrase.length;i++){ 
     text += phrase[i];
     render(text + '\n');
-    await sleep(typingSpeed + Math.random()*40);
+    await sleep(randomTypingDelay());
     window.scrollTo(0, document.body.scrollHeight);
   }
   await sleep(linePause);
