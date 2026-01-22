@@ -79,6 +79,31 @@
                 return Math.floor(min + Math.random() * (max - min + 1));
             }
 
+            function glitchWord(word, chance) {
+                if (word.length < 2 || chance === 0) return word;
+
+                if (Math.random() < chance) {
+                    let chars = word.split("");
+                    const glitchType = Math.random();
+
+                    if (glitchType < 0.5) {
+                        // Swap letters
+                        const pos1 = randInt(0, chars.length - 1);
+                        let pos2 = randInt(0, chars.length - 1);
+                        while (pos1 === pos2) {
+                            pos2 = randInt(0, chars.length - 1);
+                        }
+                        [chars[pos1], chars[pos2]] = [chars[pos2], chars[pos1]];
+                    } else {
+                        // Leave out a letter
+                        const pos = randInt(0, chars.length - 1);
+                        chars.splice(pos, 1);
+                    }
+                    return chars.join("");
+                }
+                return word;
+            }
+
             async function typeText(text, currentText) {
                 // type text character-by-character
                 let acc = currentText;
@@ -92,16 +117,33 @@
             }
 
             async function typeLine(currentText, lineCount) {
-                const maxGlitchesAfterLines = 50; // after 50 lines, glitches are at max
-                const maxGlitchChance = 0.5;
-                const glitchChance = Math.min(
-                    maxGlitchChance,
-                    (lineCount / maxGlitchesAfterLines) * maxGlitchChance,
+                // layout glitches (whitespace, newlines)
+                const maxLayoutGlitchesAfterLines = 50;
+                const maxLayoutGlitchChance = 0.5;
+                const layoutGlitchChance = Math.min(
+                    maxLayoutGlitchChance,
+                    (lineCount / maxLayoutGlitchesAfterLines) *
+                        maxLayoutGlitchChance,
                 );
+
+                // word glitches (swapping/dropping letters)
+                const startWordGlitchesAfterLines = 20; // start later
+                const maxWordGlitchesAfterLines = 100; // take longer to reach max
+                const maxWordGlitchChance = 0.3; // less frequent than layout glitches
+                let wordGlitchChance = 0;
+                if (lineCount > startWordGlitchesAfterLines) {
+                    wordGlitchChance = Math.min(
+                        maxWordGlitchChance,
+                        ((lineCount - startWordGlitchesAfterLines) /
+                            (maxWordGlitchesAfterLines -
+                                startWordGlitchesAfterLines)) *
+                            maxWordGlitchChance,
+                    );
+                }
 
                 let acc = currentText || "";
                 // maybe add 1..2 leading whitespace
-                if (Math.random() < glitchChance) {
+                if (Math.random() < layoutGlitchChance) {
                     const leadCount = randInt(1, 2);
                     acc = await typeText(" ".repeat(leadCount), acc);
                 }
@@ -109,13 +151,14 @@
                 // type words with possible 1..2 extra spaces between them
                 const words = phrase.split(" ");
                 for (let w = 0; w < words.length; w++) {
-                    const word = words[w];
+                    let word = words[w];
+                    word = glitchWord(word, wordGlitchChance);
                     acc = await typeText(word, acc);
                     if (w < words.length - 1) {
                         // always type one normal space
                         acc = await typeText(" ", acc);
                         // maybe add one or two extra spaces
-                        if (Math.random() < glitchChance) {
+                        if (Math.random() < layoutGlitchChance) {
                             const extra = randInt(1, 2);
                             acc = await typeText(" ".repeat(extra), acc);
                         }
@@ -126,7 +169,7 @@
                 await sleep(linePause);
 
                 // decide whether to append newline or skip it
-                if (Math.random() >= glitchChance) {
+                if (Math.random() >= layoutGlitchChance) {
                     acc = await typeText("\n", acc);
                 } else {
                     // skipping newline: render current state without adding '\n'
