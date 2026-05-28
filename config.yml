@@ -54,7 +54,7 @@ params:
     # 	imageHeight: 120 # custom size
     buttons:
       - name: "ideate."
-        url: "https://calendar.app.google/HtmDbH3wV4EcPjUX7"
+        url: "/calendar"
       - name: "product."
         url: "https://pramari.de/"
 
