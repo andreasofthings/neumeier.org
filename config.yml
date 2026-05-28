@@ -8,7 +8,6 @@ theme: "hugo-PaperMod"
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: home
-params:
   description: "Product Management and Privacy Considerations, entry page for projects and contacts of Andreas Neumeier"
   keywords: [Blog, Portfolio, Andreas, Site, WebSite, Enterprise, Software, Product, Privacy]
   author:
