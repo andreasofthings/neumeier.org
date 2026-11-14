@@ -12,7 +12,7 @@ hidemeta: false
 comments: true
 description: "Useful links."
 canonicalURL: "https://neumeier.org/links"
-disableHLJS: true # to disable highlightjs
+# disableHLJS: true # to disable highlightjs (removed duplicate key; effective value below)
 disableShare: false
 disableHLJS: false
 hideSummary: false

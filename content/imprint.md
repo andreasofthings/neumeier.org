@@ -12,7 +12,7 @@ hidemeta: false
 comments: false
 description: "Impressum."
 canonicalURL: "https://neumeier.org/imprint"
-disableHLJS: true # to disable highlightjs
+# disableHLJS: true # to disable highlightjs
 disableShare: false
 disableHLJS: false
 hideSummary: false

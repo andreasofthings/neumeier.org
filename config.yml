@@ -110,3 +110,12 @@ outputs:
        - HTML
        - RSS
        - JSON # necessary for search
+
+# Hugo 0.167+ denies text/html content files by default via security.allowContent,
+# which uses deny-list semantics: a "! " prefix denies a matching type, everything
+# else is allowed. Hugo's default is ["! ^text/html$", "! ^text/org$"]; this site
+# stores some pages as raw HTML (e.g. /calendar, /fiftyplus), so only the org entry
+# is kept. CI pins Hugo 0.146.0, which has no such policy and ignores the key.
+security:
+  allowContent:
+    - "! ^text/org$"

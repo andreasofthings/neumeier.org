@@ -1,0 +1,933 @@
+---
+title: "Fifty+"
+description: "Registration for Andreas' 50th birthday - 29 May 2027."
+build:
+  list: never
+---
+
+<!-- Fiftyplus guest registration - ONE self-contained page.
+     Configuration (api_base, event texts, identity provider) is embedded
+     in the script below; styles and the whole app live in this file too.
+
+     api_base is "REPLACE-ME" until the registration API (separate Django
+     project) is deployed: the page then shows a friendly
+     "service is being configured" state and makes no API calls. -->
+<div id="fp-app" class="fp-app">
+  <noscript>
+    <p class="fp-error">
+      This page needs JavaScript for the registration flow.
+      / Diese Seite ben&ouml;tigt JavaScript f&uuml;r die Registrierung.
+    </p>
+  </noscript>
+  <p class="fp-loading">Loading / Lade&hellip;</p>
+</div>
+
+<style>
+  .fp-app {
+    --fp-accent: #0969da;
+    --fp-accent-dark: #0550ae;
+    --fp-ok: #1a7f37;
+    --fp-danger: #cf222e;
+    --fp-border: rgba(127, 127, 127, 0.38);
+    --fp-muted: rgba(127, 127, 127, 0.95);
+    --fp-card: rgba(127, 127, 127, 0.07);
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .fp-app, .fp-app * { box-sizing: border-box; }
+  .fp-card {
+    border: 1px solid var(--fp-border);
+    border-radius: 10px;
+    padding: 1rem 1.15rem;
+    margin: 1rem 0;
+    background: var(--fp-card);
+  }
+  .fp-muted { color: var(--fp-muted); font-size: 0.92em; }
+  .fp-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.25rem 0;
+  }
+  .fp-btn {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid var(--fp-border);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+  }
+  .fp-btn:hover { border-color: var(--fp-accent); color: var(--fp-accent); }
+  .fp-btn-primary { background: var(--fp-accent); border-color: var(--fp-accent); color: #fff; }
+  .fp-btn-primary:hover { background: var(--fp-accent-dark); border-color: var(--fp-accent-dark); color: #fff; }
+  .fp-btn-small { padding: 0.25rem 0.55rem; font-size: 0.85em; }
+  .fp-btn[disabled] { opacity: 0.55; pointer-events: none; }
+  .fp-app h2 { margin: 0.25rem 0 0.6rem; font-size: 1.25rem; }
+  .fp-app label { display: block; margin: 0.55rem 0 0.15rem; font-weight: 600; }
+  .fp-app input[type="text"],
+  .fp-app input[type="email"],
+  .fp-app textarea {
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--fp-border);
+    border-radius: 8px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+  }
+  .fp-app input:focus, .fp-app textarea:focus {
+    outline: 2px solid var(--fp-accent);
+    outline-offset: 1px;
+  }
+  .fp-radios { display: flex; gap: 1.25rem; margin-top: 0.3rem; flex-wrap: wrap; }
+  .fp-radios label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 400;
+    margin: 0;
+    cursor: pointer;
+  }
+  .fp-blockhead { margin: 0.75rem 0 0.15rem; font-weight: 600; }
+  .fp-companionrow {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.45rem;
+    align-items: center;
+    margin-top: 0.35rem;
+  }
+  .fp-kindtag {
+    font-size: 0.75em;
+    color: var(--fp-muted);
+    border: 1px solid var(--fp-border);
+    padding: 0.1rem 0.45rem;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .fp-userbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .fp-statuspill {
+    display: inline-block;
+    margin-left: 0.25rem;
+    padding: 0.05rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.8em;
+    color: var(--fp-ok);
+    border: 1px solid var(--fp-ok);
+    white-space: nowrap;
+  }
+  .fp-error {
+    border: 1px solid var(--fp-danger);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+  }
+  .fp-error strong { color: var(--fp-danger); }
+  .fp-success { color: var(--fp-ok); margin: 0.5rem 0 0; }
+  .fp-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .fp-loading { color: var(--fp-muted); }
+  .fp-spinner {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: fp-spin 0.8s linear infinite;
+    vertical-align: -2px;
+  }
+  @keyframes fp-spin { to { transform: rotate(360deg); } }
+  @media (max-width: 480px) {
+    .fp-companionrow { grid-template-columns: 1fr auto; }
+    .fp-companionrow .fp-kindtag { display: none; }
+  }
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ------------------------------------------------------------- config --
+     Embedded page configuration. Replace api_base once the registration
+     API (separate Django project) is deployed; "REPLACE-ME" keeps the
+     page in its friendly not-configured state. */
+  const CFG = {
+    api_base: "https://pramari.de/fiftyplus",
+    auth: {
+      base: "https://id.pramari.de",
+      slug: "fiftyplus",
+      client_id: "fiftyplus",
+    },
+    event: {
+      date: "2027-05-29",
+      start: "16:00",
+      end: "22:00",
+      title_de: "Andreas wird 50",
+      title_en: "Andreas turns 50",
+      intro_de:
+        "Ich werde 50 und freue mich, das mit euch zu feiern. " +
+        "Bitte registriert euch hier bis Anfang Mai - " +
+        "Partnerin, Partner und Kinder sind willkommen.",
+      intro_en:
+        "I am turning 50 and would love to celebrate with you. " +
+        "Please register here by early May - partners and kids welcome.",
+      location: "Ort wird noch bekanntgegeben",
+      location_en: "Venue to be announced",
+      contact_email: "andreas@neumeier.org",
+    },
+  };
+
+  const API = (CFG.api_base || "").replace(/\/+$/, "");
+  const AUTH = CFG.auth || {};
+  const BASE = (AUTH.base || "https://id.pramari.de").replace(/\/+$/, "");
+  const SLUG = AUTH.slug || "fiftyplus";
+  const CLIENT_ID = AUTH.client_id || SLUG;
+  const ISSUER = BASE + "/application/o/" + SLUG;
+  const AUTHORIZE_URL = ISSUER + "/authorize/";
+  const TOKEN_URL = ISSUER + "/token/";
+  const USERINFO_URL = ISSUER + "/userinfo/";
+  const ICS_URL = "/fiftyplus/event.ics";
+
+  /* ---------------------------------------------------------------- i18n */
+  const I18N = {
+    de: {
+      toggle: "EN",
+      loginCard: "Anmeldung",
+      loginIntro:
+        "Um dich zu registrieren, melde dich bitte an. Die Anmeldung läuft über id.pramari.de " +
+        "(authentik) - mit deiner E-Mail-Adresse und einem Passwort oder mit Google.",
+      loginWith: "Mit E-Mail oder Google anmelden",
+      whoami: "Angemeldet als",
+      logout: "Abmelden",
+      registeredPill: "Registriert",
+      formTitle: "Deine Registrierung",
+      firstName: "Vorname",
+      lastName: "Nachname",
+      attendingQ: "Kommst du?",
+      yes: "Ja!",
+      no: "Leider nein",
+      spouseFieldset: "Deine Partnerin / dein Partner",
+      spouseName: "Name",
+      spouseEmail: "E-Mail (optional)",
+      spouseEmailHint:
+        "Wenn angegeben, bekommt sie/er den Kalendereintrag per E-Mail.",
+      kidsFieldset: "Deine Kinder",
+      kidName: "Name",
+      addChild: "Kind hinzufügen",
+      messageLabel: "Nachricht an mich (optional)",
+      messagePlaceholder: "z. B. Anmerkungen, Allergien, Musikwünsche …",
+      submit: "Registrieren",
+      update: "Änderung speichern",
+      submitting: "Speichern …",
+      thanksYes: "Danke - du bist registriert!",
+      thanksNo: "Schade - deine Absage ist gespeichert. Vielleicht ein anderes Mal!",
+      mailInfo: "Der Kalendereintrag (.ics) ist gerade per E-Mail an {email} unterwegs.",
+      mailInfoCc: " (Kopie an {cc})",
+      calendarBtn: "Kalendereintrag (.ics) laden",
+      resend: "Eintrag erneut senden",
+      editAgain: "Registrierung ändern",
+      registeredSince: "Registriert am",
+      youAre: "Du bist dabei mit",
+      spouseTag: "Partner/in",
+      kidTag: "Kind",
+      retry: "Nochmal",
+      loading: "Lade …",
+      errLogin: "Anmeldung fehlgeschlagen oder abgebrochen. Bitte erneut versuchen.",
+      errSession: "Sitzung abgelaufen - bitte erneut anmelden.",
+      errNotInvited:
+        "Diese E-Mail-Adresse steht nicht auf der Gästeliste. " +
+        "Bitte melde dich bei Andreas, wenn das nicht stimmt.",
+      errNotConfigured:
+        "Der Registrierungsdienst wird gerade noch eingerichtet. " +
+        "Bitte schau später noch einmal vorbei.",
+      errApiDown:
+        "Der Registrierungsdienst ist gerade nicht erreichbar. " +
+        "Bitte später erneut versuchen.",
+      errGeneric: "Da ist etwas schiefgelaufen. Bitte später erneut versuchen.",
+    },
+    en: {
+      toggle: "DE",
+      loginCard: "Sign in",
+      loginIntro:
+        "Please sign in to register. Sign-in is handled by id.pramari.de (authentik) - " +
+        "using your email address with a password, or with Google.",
+      loginWith: "Sign in with email or Google",
+      whoami: "Signed in as",
+      logout: "Sign out",
+      registeredPill: "Registered",
+      formTitle: "Your registration",
+      firstName: "First name",
+      lastName: "Last name",
+      attendingQ: "Will you join?",
+      yes: "Yes!",
+      no: "Unfortunately not",
+      spouseFieldset: "Your spouse / partner",
+      spouseName: "Name",
+      spouseEmail: "Email (optional)",
+      spouseEmailHint: "If given, they receive the calendar entry by email, too.",
+      kidsFieldset: "Your kids",
+      kidName: "Name",
+      addChild: "Add kid",
+      messageLabel: "Message to me (optional)",
+      messagePlaceholder: "e.g. notes, allergies, music requests …",
+      submit: "Register",
+      update: "Save changes",
+      submitting: "Saving …",
+      thanksYes: "Thank you - you are registered!",
+      thanksNo: "Sorry you cannot make it - your reply is saved. Maybe another time!",
+      mailInfo: "The calendar entry (.ics) is on its way to {email} by email.",
+      mailInfoCc: " (copy to {cc})",
+      calendarBtn: "Download calendar entry (.ics)",
+      resend: "Send entry again",
+      editAgain: "Edit registration",
+      registeredSince: "Registered on",
+      youAre: "You are coming with",
+      spouseTag: "spouse",
+      kidTag: "kid",
+      retry: "Retry",
+      loading: "Loading …",
+      errLogin: "Sign-in failed or was cancelled. Please try again.",
+      errSession: "Session expired - please sign in again.",
+      errNotInvited:
+        "This email address is not on the guest list. " +
+        "If that seems wrong, please contact Andreas.",
+      errNotConfigured:
+        "The registration service is still being set up. " +
+        "Please check back a little later.",
+      errApiDown:
+        "The registration service is unreachable right now. " +
+        "Please try again later.",
+      errGeneric: "Something went wrong. Please try again later.",
+    },
+  };
+
+  /* --------------------------------------------------------------- state */
+  const state = {
+    lang: "de",
+    view: "loading", // loading | login | form | done | error
+    error: null,     // { friendly, detail }
+    user: null,      // { sub, email, name }
+    me: null,        // response of GET /api/me
+    submitting: false,
+    sending: false,
+    form: null,      // editable form fields
+  };
+
+  const SESSION = {
+    TOKEN: "fp_token",
+    EXPIRY: "fp_token_exp",
+    USER: "fp_user",
+    VERIFIER: "fp_verifier",
+    STATE: "fp_state",
+  };
+
+  const appRoot = document.getElementById("fp-app");
+  if (!appRoot) return;
+
+  /* ---------------------------------------------------------------- util */
+  function save(k, v) { sessionStorage.setItem(k, v); }
+  function load(k) { return sessionStorage.getItem(k); }
+  function clearSession() {
+    [SESSION.TOKEN, SESSION.EXPIRY, SESSION.USER, SESSION.VERIFIER, SESSION.STATE]
+      .forEach(k => sessionStorage.removeItem(k));
+  }
+
+  function t(key, vars) {
+    let s = (I18N[state.lang] && I18N[state.lang][key]) || I18N.en[key] || key;
+    if (vars) {
+      Object.keys(vars).forEach(k => {
+        s = s.split("{" + k + "}").join(vars[k]);
+      });
+    }
+    return s;
+  }
+
+  /* el(tag, attrs, kids): DOM builder; keeps all markup out of JS strings. */
+  function el(tag, attrs, kids) {
+    const node = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(k => {
+        const v = attrs[k];
+        if (v == null) return;
+        if (k === "class") node.className = v;
+        else if (k === "text") node.textContent = v;
+        else if (k.slice(0, 2) === "on") node.addEventListener(k.slice(2), v);
+        else node.setAttribute(k, v);
+      });
+    }
+    (kids || []).forEach(c => {
+      if (c == null) return;
+      node.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return node;
+  }
+
+  function pickLang() {
+    const qp = new URLSearchParams(location.search);
+    const ask = (qp.get("lang") || "").toLowerCase();
+    if (ask === "de" || ask === "en") {
+      localStorage.setItem("fp_lang", ask);
+      return ask;
+    }
+    const stored = (localStorage.getItem("fp_lang") || "").toLowerCase();
+    if (stored === "de" || stored === "en") return stored;
+    return (navigator.language || "").toLowerCase().indexOf("de") === 0 ? "de" : "en";
+  }
+
+  function setLang(l) {
+    localStorage.setItem("fp_lang", l);
+    state.lang = l;
+    render();
+  }
+
+  function fmtDateTime(iso) {
+    try {
+      return new Date(iso).toLocaleString(state.lang === "de" ? "de-DE" : "en-GB", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+    } catch (e) {
+      return iso;
+    }
+  }
+
+  function eventLine() {
+    const locale = state.lang === "de" ? "de-DE" : "en-GB";
+    const ev = CFG.event;
+    let line = new Date(ev.date + "T12:00:00Z").toLocaleDateString(locale, {
+      weekday: "long", year: "numeric", month: "long", day: "numeric",
+    });
+    if (ev.start) line += " · " + ev.start + (ev.end ? "-" + ev.end : "");
+    return line;
+  }
+
+  function eventLocation() {
+    const ev = CFG.event;
+    return state.lang === "de" ? ev.location : (ev.location_en || ev.location);
+  }
+
+  function headline() {
+    return state.lang === "en" ? CFG.event.title_en : CFG.event.title_de;
+  }
+
+  function introText() {
+    return state.lang === "en" ? CFG.event.intro_en : CFG.event.intro_de;
+  }
+
+  /* ---------------------------------------------------------------- oidc */
+  const b64url = bytes => {
+    let bin = "";
+    bytes.forEach(b => bin += String.fromCharCode(b));
+    return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  };
+  const randB64url = n => {
+    const a = new Uint8Array(n);
+    crypto.getRandomValues(a);
+    return b64url(a);
+  };
+  async function pkceChallenge(verifier) {
+    const data = new TextEncoder().encode(verifier);
+    const digest = await crypto.subtle.digest("SHA-256", data);
+    return b64url(new Uint8Array(digest));
+  }
+
+  function redirectUri() {
+    return location.origin + "/fiftyplus/";
+  }
+
+  async function startLogin() {
+    const verifier = randB64url(64);
+    const challenge = await pkceChallenge(verifier);
+    const st = randB64url(24);
+    save(SESSION.VERIFIER, verifier);
+    save(SESSION.STATE, st);
+    location.assign(AUTHORIZE_URL +
+      "?response_type=code" +
+      "&client_id=" + encodeURIComponent(CLIENT_ID) +
+      "&redirect_uri=" + encodeURIComponent(redirectUri()) +
+      "&scope=" + encodeURIComponent("openid profile email") +
+      "&code_challenge=" + encodeURIComponent(challenge) +
+      "&code_challenge_method=S256" +
+      "&state=" + encodeURIComponent(st));
+  }
+
+  async function finishLogin(params) {
+    const code = params.get("code");
+    const st = params.get("state");
+    const expected = load(SESSION.STATE);
+    const verifier = load(SESSION.VERIFIER);
+    clearSession();
+    if (!code || !st || st !== expected || !verifier) throw new Error("login_flow_broken");
+    const body = new URLSearchParams({
+      grant_type: "authorization_code",
+      code: code,
+      redirect_uri: redirectUri(),
+      client_id: CLIENT_ID,
+      code_verifier: verifier,
+    });
+    const res = await fetch(TOKEN_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
+    });
+    if (!res.ok) throw new Error("token_exchange_failed");
+    const tok = await res.json();
+    if (!tok.access_token) throw new Error("no_access_token");
+    save(SESSION.TOKEN, tok.access_token);
+    save(SESSION.EXPIRY, String(Date.now() + (tok.expires_in ? tok.expires_in * 1000 : 3600000)));
+
+    const ui = await fetch(USERINFO_URL, { headers: { Authorization: "Bearer " + tok.access_token } });
+    if (!ui.ok) throw new Error("userinfo_failed");
+    const claims = await ui.json();
+    const user = {
+      sub: claims.sub,
+      email: claims.email,
+      name: claims.name || claims.preferred_username || claims.given_name || claims.email,
+    };
+    save(SESSION.USER, JSON.stringify(user));
+    return user;
+  }
+
+  function storedUser() {
+    const tok = load(SESSION.TOKEN);
+    const exp = Number(load(SESSION.EXPIRY) || 0);
+    const raw = load(SESSION.USER);
+    if (!tok || !raw || exp < Date.now() + 30000) return null;
+    try { return JSON.parse(raw); } catch (e) { return null; }
+  }
+
+  /* ---------------------------------------------------------- api client */
+  async function api(path, opts) {
+    opts = opts || {};
+    const headers = {};
+    const tok = load(SESSION.TOKEN);
+    if (tok) headers.Authorization = "Bearer " + tok;
+    if (opts.body) headers["Content-Type"] = "application/json";
+    let res;
+    try {
+      res = await fetch(API + path, {
+        method: opts.method || "GET",
+        headers: headers,
+        body: opts.body ? JSON.stringify(opts.body) : undefined,
+      });
+    } catch (e) {
+      const err = new Error("network");
+      err.friendly = "errApiDown";
+      throw err;
+    }
+    if (res.status === 401) {
+      const err = new Error("unauthorized");
+      err.friendly = "errSession";
+      throw err;
+    }
+    if (res.status === 403) {
+      const err = new Error("forbidden");
+      err.friendly = "errNotInvited";
+      throw err;
+    }
+    let data = null;
+    try { data = await res.json(); } catch (e) { /* empty body ok */ }
+    if (!res.ok) {
+      const err = new Error((data && data.error) || "api_error_" + res.status);
+      if (!data || !data.error) err.friendly = "errGeneric";
+      err.detail = (data && (data.detail || data.error)) || null;
+      throw err;
+    }
+    return data;
+  }
+
+  /* ------------------------------------------------------------- helpers */
+  function registration() {
+    return state.me ? state.me.registration : null;
+  }
+  function findCompanion(r, kind) {
+    return ((r && r.companions) || []).filter(c => c.kind === kind)[0] || null;
+  }
+  function companionsOf(r, kind) {
+    return ((r && r.companions) || []).filter(c => c.kind === kind);
+  }
+  function guessFirstName() {
+    return state.user && state.user.name ? String(state.user.name).trim().split(/\s+/)[0] : "";
+  }
+
+  function formData() {
+    if (!state.form) {
+      const r = registration();
+      const spouse = findCompanion(r, "spouse");
+      state.form = {
+        first_name: r && r.first_name ? r.first_name : guessFirstName(),
+        last_name: r && r.last_name ? r.last_name : "",
+        attending: r ? r.attending : "yes",
+        spouse: spouse ? { name: spouse.name || "", email: spouse.email || "" } : { name: "", email: "" },
+        kids: companionsOf(r, "child").map(c => ({ name: c.name || "" })),
+        message: r && r.message ? r.message : "",
+      };
+      if (!state.form.kids.length) state.form.kids.push({});
+    }
+    return state.form;
+  }
+
+  /* --------------------------------------------------------------- views */
+  function topline() {
+    return el("div", { class: "fp-topline" }, [
+      el("span", { class: "fp-muted", text: eventLine() }),
+      el("button", {
+        class: "fp-btn fp-btn-small", type: "button", text: t("toggle"),
+        onclick: () => setLang(state.lang === "de" ? "en" : "de"),
+      }),
+    ]);
+  }
+
+  function statuspill() {
+    return registration() ? el("span", { class: "fp-statuspill", text: t("registeredPill") }) : null;
+  }
+
+  function userbox() {
+    return el("div", { class: "fp-card fp-userbox" }, [
+      el("span", {}, [
+        document.createTextNode("👤 " + t("whoami") + ": "),
+        el("strong", { text: state.user ? state.user.email : "" }),
+        statuspill(),
+      ]),
+      el("button", { class: "fp-btn fp-btn-small", type: "button", text: t("logout"), onclick: () => logout() }),
+    ]);
+  }
+
+  function loadingView() {
+    const p = el("p", { class: "fp-loading" });
+    p.appendChild(el("span", { class: "fp-spinner" }));
+    p.appendChild(document.createTextNode(" " + t("loading")));
+    return p;
+  }
+
+  function errorView() {
+    const err = state.error || {};
+    const wrap = el("div", {});
+    wrap.appendChild(el("div", { class: "fp-error" }, [
+      el("strong", { text: t(err.friendly || "errGeneric") }),
+      err.detail ? el("div", { class: "fp-muted", text: String(err.detail) }) : null,
+    ]));
+    const actions = el("div", { class: "fp-actions" });
+    actions.appendChild(el("button", { class: "fp-btn", type: "button", text: t("retry"), onclick: () => retry() }));
+    if (state.user) {
+      actions.appendChild(el("button", { class: "fp-btn", type: "button", text: t("logout"), onclick: () => logout() }));
+    }
+    wrap.appendChild(actions);
+    return wrap;
+  }
+
+  function loginView() {
+    return el("div", { class: "fp-card" }, [
+      el("h2", { text: t("loginCard") }),
+      el("p", { text: introText() }),
+      el("p", { class: "fp-muted", text: t("loginIntro") }),
+      el("p", {}, [
+        el("button", { class: "fp-btn fp-btn-primary", type: "button", text: t("loginWith"), onclick: () => startLogin() }),
+      ]),
+    ]);
+  }
+
+  function introCard() {
+    return el("div", { class: "fp-card" }, [
+      el("h2", { text: headline() }),
+      el("p", { text: introText() }),
+      el("p", { class: "fp-muted", text: eventLine() + " · " + eventLocation() }),
+    ]);
+  }
+
+  function formCard() {
+    const f = formData();
+    const r = registration();
+    const card = el("div", { class: "fp-card fp-form" });
+    card.appendChild(el("h2", { text: t("formTitle") }));
+
+    card.appendChild(el("label", { for: "fp-first", text: t("firstName") }));
+    card.appendChild(el("input", {
+      id: "fp-first", type: "text", autocomplete: "given-name",
+      value: f.first_name || "", oninput: e => { f.first_name = e.target.value; },
+    }));
+    card.appendChild(el("label", { for: "fp-last", text: t("lastName") }));
+    card.appendChild(el("input", {
+      id: "fp-last", type: "text", autocomplete: "family-name",
+      value: f.last_name || "", oninput: e => { f.last_name = e.target.value; },
+    }));
+
+    card.appendChild(el("p", { class: "fp-blockhead", text: t("attendingQ") }));
+    const radios = el("div", { class: "fp-radios" });
+    ["yes", "no"].forEach(v => {
+      radios.appendChild(el("label", {}, [
+        el("input", {
+          type: "radio", name: "fp-attending", value: v,
+          checked: f.attending === v ? "checked" : null,
+        }),
+        document.createTextNode(" " + t(v)),
+      ]));
+    });
+    card.appendChild(radios);
+    card.querySelectorAll("input[name=fp-attending]").forEach(rad =>
+      rad.addEventListener("change", e => { f.attending = e.target.value; }));
+
+    card.appendChild(el("p", { class: "fp-blockhead", text: t("spouseFieldset") }));
+    card.appendChild(el("div", { class: "fp-companionrow" }, [
+      el("input", { type: "text", placeholder: t("spouseName"), "aria-label": t("spouseName"), value: f.spouse.name || "", oninput: e => { f.spouse.name = e.target.value; } }),
+      el("input", { type: "email", placeholder: t("spouseEmail"), "aria-label": t("spouseEmail"), value: f.spouse.email || "", oninput: e => { f.spouse.email = e.target.value; } }),
+      el("span", { class: "fp-kindtag", text: t("spouseTag") }),
+    ]));
+    card.appendChild(el("p", { class: "fp-muted", text: t("spouseEmailHint") }));
+
+    card.appendChild(el("p", { class: "fp-blockhead", text: t("kidsFieldset") }));
+    function kidRow(i) {
+      return el("div", { class: "fp-companionrow" }, [
+        el("input", {
+          type: "text", placeholder: t("kidName") + " " + (i + 1), "aria-label": t("kidName") + " " + (i + 1),
+          value: f.kids[i] ? (f.kids[i].name || "") : "",
+          oninput: e => { if (f.kids[i]) f.kids[i].name = e.target.value; },
+        }),
+        el("span", { class: "fp-kindtag", text: t("kidTag") }),
+        el("button", {
+          class: "fp-btn fp-btn-small", type: "button", text: "✕",
+          onclick: () => { f.kids.splice(i, 1); if (!f.kids.length) f.kids.push({}); render(); },
+        }),
+      ]);
+    }
+    f.kids.forEach((k, i) => card.appendChild(kidRow(i)));
+    card.appendChild(el("button", {
+      class: "fp-btn fp-btn-small", type: "button", text: "＋ " + t("addChild"),
+      onclick: () => { if (f.kids.length < 12) { f.kids.push({}); render(); } },
+    }));
+
+    card.appendChild(el("p", { class: "fp-blockhead", text: t("messageLabel") }));
+    card.appendChild(el("textarea", {
+      rows: "3", placeholder: t("messagePlaceholder"), text: f.message || "",
+      oninput: e => { f.message = e.target.value; },
+    }));
+
+    card.appendChild(el("p", {}, [
+      el("button", {
+        class: "fp-btn fp-btn-primary", type: "button",
+        text: state.submitting ? t("submitting") : (r ? t("update") : t("submit")),
+        disabled: state.submitting ? "disabled" : null,
+        onclick: () => submitRegistration(),
+      }),
+    ]));
+    if (r) {
+      card.appendChild(el("p", { class: "fp-muted", text: t("registeredSince") + ": " + fmtDateTime(r.updated_at) }));
+    }
+    return card;
+  }
+
+  function doneCard() {
+    const r = registration();
+    if (!r || !state.user) {
+      return el("div", { class: "fp-error" }, [el("strong", { text: t("errGeneric") })]);
+    }
+    const card = el("div", { class: "fp-card" });
+    card.appendChild(el("h2", { text: t(r.attending === "yes" ? "thanksYes" : "thanksNo") }));
+
+    const comps = r.companions || [];
+    if (comps.length) {
+      card.appendChild(el("p", { text: t("youAre") + ":" }));
+      const ul = el("ul", {});
+      comps.forEach(c => {
+        ul.appendChild(el("li", { text: (c.name || "") + " (" + t(c.kind === "spouse" ? "spouseTag" : "kidTag") + (c.email ? ", " + c.email : "") + ")" }));
+      });
+      card.appendChild(ul);
+    }
+
+    if (r.attending === "yes" && r.mail_sent_at) {
+      const ccEmails = companionsOf(r, "spouse").filter(c => c.email).map(c => c.email);
+      card.appendChild(el("p", {
+        class: "fp-success",
+        text: t("mailInfo", { email: state.user.email }) +
+          (ccEmails.length ? t("mailInfoCc", { cc: ccEmails.join(", ") }) : ""),
+      }));
+    }
+
+    const actions = el("div", { class: "fp-actions" });
+    if (r.attending === "yes") {
+      actions.appendChild(el("a", { class: "fp-btn", href: ICS_URL, text: "📅 " + t("calendarBtn") }));
+      actions.appendChild(el("button", {
+        class: "fp-btn", type: "button",
+        text: t("resend") + (r.mail_sent_at ? " ✓" : ""),
+        disabled: state.sending ? "disabled" : null,
+        onclick: () => resend(),
+      }));
+    }
+    actions.appendChild(el("button", {
+      class: "fp-btn", type: "button", text: t("editAgain"),
+      onclick: () => { state.form = null; state.view = "form"; render(); },
+    }));
+    card.appendChild(actions);
+    return card;
+  }
+
+  function render() {
+    document.title = headline() + " · " + (state.lang === "de" ? "Registrierung" : "Registration");
+    appRoot.replaceChildren();
+    appRoot.appendChild(topline());
+    const main = el("div", { class: "fp-main" });
+    if (state.view === "loading") main.appendChild(loadingView());
+    else if (state.view === "error") main.appendChild(errorView());
+    else if (state.view === "login") main.appendChild(loginView());
+    else if (state.view === "form") {
+      main.appendChild(introCard());
+      main.appendChild(userbox());
+      main.appendChild(formCard());
+    } else if (state.view === "done") {
+      main.appendChild(introCard());
+      main.appendChild(userbox());
+      main.appendChild(doneCard());
+    }
+    appRoot.appendChild(main);
+  }
+
+  /* --------------------------------------------------------------- flows */
+  function handleError(err) {
+    if (err && err.friendly === "errSession") {
+      clearSession();
+      state.user = null;
+      state.me = null;
+      state.form = null;
+      state.view = "login";
+      return;
+    }
+    state.error = err || { friendly: "errGeneric" };
+    state.view = "error";
+  }
+
+  function retry() {
+    state.error = null;
+    route();
+  }
+
+  function logout() {
+    clearSession();
+    state.user = null;
+    state.me = null;
+    state.form = null;
+    state.view = "login";
+    render();
+  }
+
+  async function submitRegistration() {
+    if (state.submitting) return;
+    state.submitting = true;
+    render();
+    const f = state.form;
+    const companions = [];
+    const sName = (f.spouse.name || "").trim();
+    const sMail = (f.spouse.email || "").trim();
+    if (sName) companions.push({ kind: "spouse", name: sName, email: sMail || null });
+    f.kids.forEach(k => {
+      const n = (k.name || "").trim();
+      if (n) companions.push({ kind: "child", name: n, email: null });
+    });
+    const body = {
+      attending: f.attending,
+      first_name: (f.first_name || "").trim(),
+      last_name: (f.last_name || "").trim(),
+      lang: state.lang,
+      message: f.message ? f.message : null,
+      companions: companions,
+    };
+    try {
+      await api("/api/registration", { method: "PUT", body: body });
+      state.me = await api("/api/me");
+      state.form = null;
+      state.view = "done";
+    } catch (err) {
+      handleError(err);
+    }
+    state.submitting = false;
+    render();
+  }
+
+  async function resend() {
+    if (state.sending) return;
+    state.sending = true;
+    render();
+    try {
+      await api("/api/resend", { method: "POST" });
+      if (state.me && state.me.registration) {
+        state.me.registration.mail_sent_at = new Date().toISOString();
+      }
+    } catch (err) {
+      handleError(err);
+    }
+    state.sending = false;
+    render();
+  }
+
+  async function route() {
+    state.view = "loading";
+    render();
+
+    if (!API || API.indexOf("REPLACE-ME") !== -1) {
+      state.error = { friendly: "errNotConfigured" };
+      state.view = "error";
+      render();
+      return;
+    }
+
+    state.user = storedUser();
+    if (!state.user) {
+      state.view = "login";
+      render();
+      return;
+    }
+
+    try {
+      state.me = await api("/api/me");
+      state.view = "form";
+    } catch (err) {
+      handleError(err);
+    }
+    render();
+  }
+
+  function cleanUrl(params) {
+    params.delete("code");
+    params.delete("state");
+    const qs = params.toString();
+    history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
+  }
+
+  async function init() {
+    state.lang = pickLang();
+    const params = new URLSearchParams(location.search);
+    if (params.get("code") && params.get("state")) {
+      try {
+        state.user = await finishLogin(params);
+      } catch (err) {
+        clearSession();
+        state.error = { friendly: "errLogin", detail: String(err.message || err) };
+        state.view = "error";
+        cleanUrl(params);
+        render();
+        return;
+      }
+      cleanUrl(params);
+      await route();
+      return;
+    }
+    await route();
+  }
+
+  /* The script tag sits below the #fp-app mount point, so the element
+     exists already - no DOMContentLoaded dance needed. */
+  init();
+})();
+
+</script>

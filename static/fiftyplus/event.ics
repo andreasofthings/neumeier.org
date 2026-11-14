@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//neumeier.org//FiftyPlus//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:fiftyplus-2027-05-29@neumeier.org
+DTSTAMP:20261114T120000Z
+DTSTART:20270529T160000
+DTEND:20270529T220000
+SUMMARY:Andreas wird 50 / Andreas turns 50
+DESCRIPTION:Register at https://www.neumeier.org/fiftyplus/
+LOCATION:Ort wird noch bekanntgegeben / Venue to be announced
+URL:https://www.neumeier.org/fiftyplus/
+END:VEVENT
+END:VCALENDAR
