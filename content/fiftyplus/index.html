@@ -168,7 +168,7 @@ build:
     auth: {
       base: "https://id.pramari.de",
       slug: "fiftyplus",
-      client_id: "fiftyplus",
+      client_id: "rbhf5YYZtk7V7OQWVSVJwvEST8aPPuI30mphMF0J",
     },
     event: {
       date: "2027-05-29",
@@ -194,10 +194,14 @@ build:
   const BASE = (AUTH.base || "https://id.pramari.de").replace(/\/+$/, "");
   const SLUG = AUTH.slug || "fiftyplus";
   const CLIENT_ID = AUTH.client_id || SLUG;
-  const ISSUER = BASE + "/application/o/" + SLUG;
-  const AUTHORIZE_URL = ISSUER + "/authorize/";
-  const TOKEN_URL = ISSUER + "/token/";
-  const USERINFO_URL = ISSUER + "/userinfo/";
+  /* Endpoint topology per authentik (verified against the live discovery
+     document, see docs/authentik-setup.md): authorize/token/userinfo are
+     GLOBAL (/application/o/authorize/ etc. - no slug). Only discovery,
+     jwks and end-session are per-slug; the SPA uses none of those
+     slug routes (JWKS is validated server-side by the API). */
+  const AUTHORIZE_URL = BASE + "/application/o/authorize/";
+  const TOKEN_URL = BASE + "/application/o/token/";
+  const USERINFO_URL = BASE + "/application/o/userinfo/";
   const ICS_URL = "/fiftyplus/event.ics";
 
   /* ---------------------------------------------------------------- i18n */
