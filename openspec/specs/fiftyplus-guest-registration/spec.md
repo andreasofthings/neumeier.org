@@ -104,11 +104,11 @@ The page SHALL carry its configuration (API base, event texts, identity-provider
 - **THEN** the page shows the bilingual not-configured error message without attempting API calls
 
 ### Requirement: Friendly error handling
-The page SHALL translate API outcomes into bilingual guest-facing messages: 401 as re-sign-in, 403 as "not on the guest list", network failure as service unreachable, and any other failure as a generic error with a retry action.
+The page SHALL translate API outcomes into bilingual guest-facing messages: 401 as re-sign-in, 403 as bilingual guidance to verify the guest's email address at the identity provider and sign in again, network failure as service unreachable, and any other failure as a generic error with a retry action.
 
 #### Scenario: Guest rejected by the API
 - **WHEN** the API responds with 403 during the guest flow
-- **THEN** the guest sees the bilingual "not on the guest list" message, not the session-expired message
+- **THEN** the guest sees bilingual guidance to verify their email address at id.pramari.de and then sign in again — not the session-expired message
 
 #### Scenario: Service unreachable
 - **WHEN** the API host is unreachable

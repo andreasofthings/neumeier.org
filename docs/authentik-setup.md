@@ -110,6 +110,42 @@ instead (*System → Brands → default brand → Default flow settings → Enro
 flow*). Same instance-wide effect (every signup then uses the new flow) — only
 worth it if you want the whole signup UI rebuilt; otherwise keep Step 2.3.
 
+### 2.5 Self-service re-verification flow
+
+The Step-2.3 bindings verify guests who click their confirmation link in time. Lost or
+expired links need a way to request a fresh mail — self-service, because guests arrive
+via the printed URL and are usually *not* signed in at id.pramari.de when they need it.
+Build one small flow that **reuses** the Step-2 objects (no duplication):
+
+- Flows and Stages → Flows → New Flow:
+  - Name/slug `email-verification`, title e.g. `E-Mail verifizieren / Verify your email`
+  - Designation: **Stage Configuration**
+  - Authentication requirement: **None** (guests arrive logged out — that is the point)
+
+- Stage Bindings, in order:
+  1. **Identification** — bind the existing **`default-recovery-identification`** stage
+     (email-only identification, no password, no sources): the guest types the address
+     of their account.
+  2. **Email** — bind the existing **`fiftyplus-verify-email`** stage (Step 2.1). It
+     sends a fresh Account-Confirmation mail to the identified user's own stored address,
+     and the flow waits until that link is clicked. Guests can therefore only trigger
+     mail to themselves; unknown addresses simply fail identification.
+  3. **User Login** — bind a User Login stage, and attach the existing
+     **`fiftyplus-record-verified-email`** policy (Step 2.2) to this stage binding
+     (Evaluate when stage is run enabled, Evaluate when flow is planned disabled — the
+     docs' recipe). On the link click the flow restores, records
+     `email_verified_address`, and signs the guest in at id.pramari.de.
+
+- Optional polish: bind a **Redirect stage** as a fourth binding, redirecting to
+  `https://www.neumeier.org/fiftyplus/` — then guests land back on the party page and
+  only need to click "Anmelden" again for a fresh token with `email_verified: true`.
+
+- Verification: open `https://id.pramari.de/if/flow/email-verification/` while logged
+  out — the email identification prompt must appear.
+
+This flow does not touch `default-enrollment` (§2.3) or any application; the same email
+stage and policy simply serve a second flow.
+
 ## Step 3 — `email_verified` scope mapping
 
 Customization → Property Mappings → Create, type **Scope Mapping**:

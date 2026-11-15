@@ -24,16 +24,12 @@ The API SHALL reject any token whose `email_verified` claim is false, because th
 - **WHEN** an authenticated token carries `email_verified: false`
 - **THEN** the API responds 403 with a JSON error and no registration data
 
-### Requirement: Invitee allowlist
-The API SHALL check the authenticated email against an imported invitee list and reject emails not on it.
+### Requirement: Registration open to verified identities
+The API SHALL accept registration requests from any authenticated identity whose `email_verified` claim is true, without consulting any invitee list. Host-side review and decline of registrations is performed in the Django admin application, not at the registration gate.
 
-#### Scenario: Not on the guest list
-- **WHEN** an authenticated guest's email is not on the invitee list
-- **THEN** the API responds 403 with a distinguishing JSON error code
-
-#### Scenario: On the guest list
-- **WHEN** the authenticated email is on the invitee list
-- **THEN** registration endpoints accept the request
+#### Scenario: Unlisted verified guest registers
+- **WHEN** an authenticated guest with `email_verified: true` reads or submits a registration and their email was never imported into any invitee list
+- **THEN** the registration endpoints process the request like any other guest's
 
 ### Requirement: Read current registration
 The API SHALL expose `GET /api/me`, returning 200 with `registration: null` for an allowed, not-yet-registered identity, and never 404 for a missing registration.
@@ -80,7 +76,7 @@ The API SHALL send an invitation email containing an .ics calendar attachment wh
 - **THEN** no invitation mail is required
 
 ### Requirement: Error shape
-The API SHALL return errors as JSON `{error: <code>, detail: <string>, optional}` with 401 for invalid or missing tokens, and 403 for rejected identities (unverified email or invitee allowlist).
+The API SHALL return errors as JSON `{error: <code>, detail: <string>, optional}` with 401 for invalid or missing tokens, and 403 for the only rejected-identity reason: an unverified email claim.
 
 #### Scenario: Error response readable by the SPA
 - **WHEN** any endpoint fails

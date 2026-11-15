@@ -203,6 +203,9 @@ build:
   const TOKEN_URL = BASE + "/application/o/token/";
   const USERINFO_URL = BASE + "/application/o/userinfo/";
   const ICS_URL = "/fiftyplus/event.ics";
+  /* Self-service re-verification flow (docs/authentik-setup.md §2.5):
+     guests whose email is unverified can request a fresh confirmation mail. */
+  const VERIFY_URL = BASE + "/if/flow/email-verification/";
 
   /* ---------------------------------------------------------------- i18n */
   const I18N = {
@@ -246,6 +249,7 @@ build:
       youAre: "Du bist dabei mit",
       spouseTag: "Partner/in",
       kidTag: "Kind",
+      verifyNow: "Jetzt E-Mail verifizieren",
       retry: "Nochmal",
       loading: "Lade …",
       errLogin: "Anmeldung fehlgeschlagen oder abgebrochen. Bitte erneut versuchen.",
@@ -300,6 +304,7 @@ build:
       youAre: "You are coming with",
       spouseTag: "spouse",
       kidTag: "kid",
+      verifyNow: "Verify email now",
       retry: "Retry",
       loading: "Loading …",
       errLogin: "Sign-in failed or was cancelled. Please try again.",
@@ -627,6 +632,9 @@ build:
       err.detail ? el("div", { class: "fp-muted", text: String(err.detail) }) : null,
     ]));
     const actions = el("div", { class: "fp-actions" });
+    if (err.friendly === "errNotVerified") {
+      actions.appendChild(el("a", { class: "fp-btn fp-btn-small", href: VERIFY_URL, text: t("verifyNow") }));
+    }
     actions.appendChild(el("button", { class: "fp-btn", type: "button", text: t("retry"), onclick: () => retry() }));
     if (state.user) {
       actions.appendChild(el("button", { class: "fp-btn", type: "button", text: t("logout"), onclick: () => logout() }));
