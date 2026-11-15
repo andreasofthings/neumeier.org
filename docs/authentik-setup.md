@@ -132,21 +132,37 @@ Keep the openid and profile mappings.
 Do **not** use the shortcut that returns `email_verified: True` unconditionally —
 guests self-register, so nothing else verifies their addresses.
 
+## Endpoint topology (authentik, verified against the live discovery document)
+
+| Group | Shape |
+|---|---|
+| Per-slug endpoints | `/application/o/<slug>/.well-known/openid-configuration`, `/application/o/<slug>/jwks/`, `/application/o/<slug>/end-session/` |
+| Global endpoints | `/application/o/authorize/`, `/application/o/token/`, `/application/o/userinfo/`, `/application/o/introspect/`, `/application/o/revoke/`, `/application/o/device/` |
+
+`authorization_endpoint`, `token_endpoint`, and `userinfo_endpoint` in the discovery
+document always carry **no slug**. Client software must use the advertised global
+URLs there; a slug-prefixed `/application/o/<slug>/authorize/` returns 404.
+
 ## Step 4 — Verification probes
 
 Run after configuration; each probe maps to a step above.
 
 1. **Discovery** — `https://id.pramari.de/application/o/fiftyplus/.well-known/openid-configuration`
-   → 200; check `issuer` ends with `/fiftyplus/` and `scopes_supported` includes
-   profile and email. (404 ⇒ Step 1 slug/typo.)
+   → 200; check `issuer` ends with `/fiftyplus/`, `scopes_supported` includes
+   profile and email, and `id_token_signing_alg_values_supported` is `RS256`.
+   (404 ⇒ Step 1 slug/typo.)
 2. **JWKS** — `https://id.pramari.de/application/o/fiftyplus/jwks/` → 200 with RSA
    keys (`kty: RSA`) ⇒ RS256 signing key took (Step 1).
-3. **Authorize** — open
-   `https://id.pramari.de/application/o/fiftyplus/authorize/?response_type=code&client_id=fiftyplus&redirect_uri=https%3A%2F%2Fwww.neumeier.org%2Ffiftyplus%2F&scope=openid%20profile%20email`
-   → the login page loads, with Google visible. (Invalid client ⇒ Client ID
-   mismatch; redirect error ⇒ URI mismatch, check trailing slash.)
-4. **CORS** — preflight the token endpoint from the site origin:
-   `curl -i -X OPTIONS -H "Origin: https://www.neumeier.org" -H "Access-Control-Request-Method: POST" https://id.pramari.de/application/o/fiftyplus/token/`
+3. **Authorize** — use the `authorization_endpoint` **from the discovery document**
+   (global shape: `https://id.pramari.de/application/o/authorize/`), with
+   `client_id=fiftyplus`, `redirect_uri=https://www.neumeier.org/fiftyplus/`,
+   `scope=openid profile email` → expect 302 into the login flow. If authentik
+   answers **400 "Client ID Error: the client identifier is missing or invalid"**
+   ⇒ the provider's Client ID is not `fiftyplus` (edit the provider). After that,
+   redirect errors ⇒ URI mismatch, check trailing slash. A slug-prefixed authorize
+   path gives 404 and is simply the wrong shape.
+4. **CORS** — preflight the (global) token endpoint from the site origin:
+   `curl -i -X OPTIONS -H "Origin: https://www.neumeier.org" -H "Access-Control-Request-Method: POST" https://id.pramari.de/application/o/token/`
    → CORS headers for `https://www.neumeier.org`. (Blocked ⇒ proxy/WAF interfering;
    authentik emits CORS per registered redirect URI.)
 5. **End-to-end from the page** — open `/fiftyplus/` in a browser (Pages preview
@@ -174,7 +190,8 @@ mapping; verification has to run again after email changes.
 | Symptom | Likely cause → fix |
 |---|---|
 | Discovery 404 | Provider/application slug not `fiftyplus`, or app not created. |
-| `invalid_client` at authorize | Client ID differs between provider and page config. |
+| `invalid_client` / 400 "Client ID Error" | Provider Client ID differs from `fiftyplus` — edit the provider's Client ID (or bake the generated ID into the page config and redeploy). |
+| Authorize path 404 | Slug inserted into `/application/o/authorize/` — authorize/token/userinfo are global; see Endpoint topology. |
 | `invalid_redirect_uri` | Redirect URI not exact (trailing slash missing / http vs https). |
 | No CORS headers on token endpoint | Proxy in front of authentik interfering, or the Pages origin not among redirect URIs. |
 | API reports unverified email although link was clicked | Policy not bound to the User Login stage binding, or token is old → sign out and in again; check `email_verified_address` attribute on the user. |
