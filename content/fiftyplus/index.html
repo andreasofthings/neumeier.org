@@ -250,9 +250,9 @@ build:
       loading: "Lade …",
       errLogin: "Anmeldung fehlgeschlagen oder abgebrochen. Bitte erneut versuchen.",
       errSession: "Sitzung abgelaufen - bitte erneut anmelden.",
-      errNotInvited:
-        "Diese E-Mail-Adresse steht nicht auf der Gästeliste. " +
-        "Bitte melde dich bei Andreas, wenn das nicht stimmt.",
+      errNotVerified:
+        "Deine E-Mail-Adresse ({email}) ist noch nicht verifiziert. " +
+        "Bitte verifiziere sie bei id.pramari.de und melde dich danach hier erneut an.",
       errNotConfigured:
         "Der Registrierungsdienst wird gerade noch eingerichtet. " +
         "Bitte schau später noch einmal vorbei.",
@@ -304,9 +304,9 @@ build:
       loading: "Loading …",
       errLogin: "Sign-in failed or was cancelled. Please try again.",
       errSession: "Session expired - please sign in again.",
-      errNotInvited:
-        "This email address is not on the guest list. " +
-        "If that seems wrong, please contact Andreas.",
+      errNotVerified:
+        "Your email address ({email}) is not verified yet. " +
+        "Please verify it at id.pramari.de and then sign in again.",
       errNotConfigured:
         "The registration service is still being set up. " +
         "Please check back a little later.",
@@ -538,7 +538,7 @@ build:
     }
     if (res.status === 403) {
       const err = new Error("forbidden");
-      err.friendly = "errNotInvited";
+      err.friendly = "errNotVerified";
       throw err;
     }
     let data = null;
@@ -618,9 +618,12 @@ build:
 
   function errorView() {
     const err = state.error || {};
+    /* 403-style messages address the guest by email; passing it for every
+       message is harmless (t() only substitutes placeholders that exist). */
+    const vars = state.user && state.user.email ? { email: state.user.email } : null;
     const wrap = el("div", {});
     wrap.appendChild(el("div", { class: "fp-error" }, [
-      el("strong", { text: t(err.friendly || "errGeneric") }),
+      el("strong", { text: t(err.friendly || "errGeneric", vars) }),
       err.detail ? el("div", { class: "fp-muted", text: String(err.detail) }) : null,
     ]));
     const actions = el("div", { class: "fp-actions" });

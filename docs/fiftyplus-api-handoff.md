@@ -57,7 +57,7 @@ or use JsonResponse so every error response has an `error` key.
 
 ### GET /api/me
 - 401 {error, detail?} — no/invalid token.
-- 403 {error: "email_unverified"|"not_invited", detail?} — rejected identity.
+- 403 {error: "email_unverified", detail?} — rejected identity: the verified email is the only admission gate; there is no invitee check.
 - 200 {"registration": null} — identity is allowed but not yet registered.
   NEVER 404 for a missing registration.
 - 200 {"registration": {...}} — existing registration:
@@ -92,14 +92,15 @@ or use JsonResponse so every error response has an `error` key.
 - Registration: email (unique, the identity key), first_name, last_name, attending,
   lang, message (nullable), mail_sent_at (nullable), created_at, updated_at.
 - Companion: registration FK, kind ("spouse"|"child"), name, email (nullable).
-- Invitee: name, email (unique, case-insensitive matching used by the allowlist).
+- Invitee (OPTIONAL, informational only): name, email (unique). Feeds an admin cross-check report ("imported invitees who have not registered"); never used as a registration gate.
 - Auth is stateless JWT; do NOT use SessionAuthentication (it pulls CSRF into the
   browser flow) — a custom DRF/PyJWT authentication class keeps POST/PUT CSRF-free.
 
 ## Host-facing admin (your scope, no cross-system contract)
 
-Invitee-import, guest list/export, "resend reminder", delete — implement freely
-(Django admin is fine). The SPA expects nothing here.
+Registration overview/review with decline-delete (the host's lever), CSV export, "resend reminder" — implement freely
+(Django admin is fine); an optional invitee-import feeds only an informational cross-check report ("imported invitees who have
+not registered"). The SPA expects nothing here.
 
 ## Acceptance tests (definition of done — run these)
 
@@ -115,11 +116,11 @@ Invitee-import, guest list/export, "resend reminder", delete — implement freel
    run a scripted OIDC login): GET /api/me → 200 {"registration": null} first time;
    PUT /api/registration → 200; GET /api/me → 200 with the registration echoed;
    PUT again → still one record, updated.
-4. A token of a non-invited (allowlisted) email → 403 {"error": "not_invited", ...}.
+4. A token with `email_verified: false` → 403 {"error": "email_unverified", ...}. A verified guest whose email was never imported registers normally — registration is open to all verified identities.
 
 ## Behavior the user will see in the browser per status (your quality bar)
 
 - 200+null → registration form; 200 with data → prefilled form ("save changes")
-- 403 → bilingual "not on the guest list" (correct UX, not a bug)
+- 403 → bilingual "verify your email, then sign in again" (correct UX, not a bug)
 - 401 → re-sign-in prompt; anything HTML/DRF-shaped → generic "something went wrong"
   (that last state is what we are eliminating now).
