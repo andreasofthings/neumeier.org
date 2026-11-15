@@ -20,7 +20,7 @@ Step 4 passes. Update it with corrections as you execute, so it reflects reality
 |---|---|
 | Provider **Client ID must be `fiftyplus`** | The page embeds `client_id: "fiftyplus"` (`content/fiftyplus/index.html`). Alternative: keep the auto-generated Client ID and change the page config, then redeploy. One of the two must match. |
 | Redirect URI is exactly `origin + "/fiftyplus/"` — trailing slash | The SPA builds the redirect URI itself; an exact mismatch → authentik rejects the redirect. |
-| Only the dedicated `fiftyplus-enrollment` flow receives the verification stages | The default enrollment flow is shared by every application on the instance; changing it affects all signups. |
+| Flow-level changes live on the shared `default-enrollment` | authentik resolves flows at **Brand** level; applications cannot assign an enrollment flow (docs 2026.8, verified in UI). Containment comes from the provider-scoped `email` scope mapping, not from the flow: other applications keep their own mappings; new signups instance-wide only gain one verification mail plus the recorded attribute. |
 
 ## Values to use
 
@@ -49,10 +49,18 @@ Step 4 passes. Update it with corrections as you execute, so it reflects reality
    - **Signing Key: select the certificate-key pair.**
    - Scopes: the defaults (openid, email, profile) are fine for now — the email
      mapping is swapped in Step 3.
-5. Create. Back on the application: note the provider's "Other flow settings" and, in
-   Step 2.5, bind the dedicated enrollment flow here.
+5. Create. Nothing else is needed at application level — authentik resolves flows
+   at Brand level, so enrollment is configured in Step 2 on the shared flow.
 
-## Step 2 — Email verification plumbing (dedicated flow)
+## Step 2 — Email verification plumbing (shared default enrollment flow)
+
+authentik selects the enrollment flow at Brand level — there is no per-application
+assignment. So this step binds the verification stages to the instance's existing
+**`default-enrollment`** flow: every new signup on the instance will additionally
+receive exactly one Account Confirmation mail and get `email_verified_address`
+recorded when it is clicked. Nothing else changes for other applications; the
+fiftyplus-specific gate (rejecting `email_verified: false`) stays in the provider's
+scope mapping in Step 3.
 
 ### 2.1 Email stage
 
@@ -60,8 +68,9 @@ Flows & Stages → Stages → Create:
 - Type **Email**; name `fiftyplus-verify-email`.
 - Enable **Use global connection settings** (SMTP is already working).
 - Template: **Account Confirmation**.
-- **Disable** *Activate pending user on success* — this flow creates active users
-  (see 2.3); gate-keeping happens via the `email_verified` claim (Step 3) instead.
+- **Disable** *Activate pending user on success* — `default-enrollment` creates
+  active users via its User Write stage; gate-keeping happens via the
+  `email_verified` claim (Step 3) instead.
 
 ### 2.2 Policy that records the verified address
 
@@ -79,32 +88,27 @@ if user and user.pk and user.email and token and token.user_id == user.pk:
 return True
 ```
 
-### 2.3 Enrollment flow + stages
+### 2.3 Bind onto `default-enrollment`
 
-Flows & Stages → Flows → Create:
-- Name/slug `fiftyplus-enrollment`, designation **Enrollment**, title
-  `Register for Fifty+ access`.
-- Policy engine mode: default (ANY/all as preselected).
+Flows & Stages → Flows → open **`default-enrollment`** (the flow guests already
+hit when self-registering) → *Stage Bindings*. Do **not** restructure its existing
+stages; make exactly two additions:
 
-Stage bindings, in this order:
-1. **Identification** — create or reuse a stage with *Show sources* enabled and the
-   existing **Google** source selected (that is what shows the "continue with
-   Google" button). Keep username field optional so guests can self-register.
-2. **Prompt** — fields: email (required), name (required), plus password with
-   confirmation for the email/password route. (If unsure, open the instance's
-   `default-enrollment` flow as an on-screen reference for its stage set and copy
-   that structure into this dedicated flow.)
-3. **User Write** — creates the user (active).
-4. **Email stage** — bind `fiftyplus-verify-email` here (after User Write, so the
-   account exists and the saved address is the one confirmed).
-5. **User Login** (flow's final stage) — expand this stage binding and attach the
-   policy `fiftyplus-record-verified-email` from 2.2. Keep *Evaluate when stage is
-   run* enabled, *Evaluate when flow is planned* disabled.
+1. Bind the email stage `fiftyplus-verify-email` **after** the flow's User Write
+   stage (so the account exists and the saved address is the one confirmed).
+2. Expand the flow's final **User Login** stage binding and attach the policy
+   `fiftyplus-record-verified-email`. Keep *Evaluate when stage is run* enabled,
+   *Evaluate when flow is planned* disabled.
 
-### 2.4 Point the application at the flow
+Only touch the enrollment flow — the authentication flow stays untouched.
 
-Applications → Fifty+ → flow settings → **Enrollment flow: `fiftyplus-enrollment`**.
-Leave the authentication flow at the instance default (sign-in), never enrollment.
+### 2.4 Variant: fully custom enrollment flow
+
+If `default-enrollment` must stay untouched for operational reasons, set the
+**Brand**'s default enrollment flow to a dedicated `fiftyplus-enrollment` flow
+instead (*System → Brands → default brand → Default flow settings → Enrollment
+flow*). Same instance-wide effect (every signup then uses the new flow) — only
+worth it if you want the whole signup UI rebuilt; otherwise keep Step 2.3.
 
 ## Step 3 — `email_verified` scope mapping
 
